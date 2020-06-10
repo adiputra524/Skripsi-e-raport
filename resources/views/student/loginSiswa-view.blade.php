@@ -17,13 +17,13 @@
 			<img src="{{asset('/image/login-logo.png')}}" alt="logo-kanaan-school">
 		</div>
 
-		<form method="post" action="/auth/Login">
+		<form method="post" action="/student/StudentLoginPage">
 			@csrf
 			<div class="login">
 				<div id="login-form">
 					<input type="email" name="email" maxlength="#maxlength" size="50" id="email-field" class="login-form-field" placeholder="Email">
 
-					<input type="password" name="password" minlength="6" size="50" id="password-field" class="login-form-field" placeholder="Password">
+					<input type="password" name="password" minlength="6"  size="50" id="password-field" class="login-form-field" placeholder="Password">
 				</div>
 
 				<label id="remember-box">

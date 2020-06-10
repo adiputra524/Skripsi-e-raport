@@ -8,13 +8,9 @@ class DashboardController extends Controller
 {
 	public function IndexDashboard()
 	{
-		return view('Dashboard');
-
-
+		return view('internal/internal-dashboard');
 	}
 
-	public function HitungNilaiRataRataSiswa(Request $request)
-	{
+	
 
-	}
 }

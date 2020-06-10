@@ -54,19 +54,19 @@ Route::prefix('kelas')->group(function()
 
 });
 
-// Route::prefix('student')->group(function(){
-// 	Route::get('/LoginStudent','StudentController@IndexLoginStudent');
-// 	// Route::get('/StudentLoginPage','StudentController@LoginStudent');
-// 	// Route::get('/LoginPageStudent','StudentController@RegisterStudent');
+Route::prefix('student')->group(function(){
+	Route::get('/LoginStudent','StudentController@IndexLoginStudent');
+	Route::post('/StudentLoginPage','StudentController@LoginStudent');
+	// Route::get('/LoginPageStudent','StudentController@RegisterStudent');
 
-// 	// Route::post('/StudentLoginPage','StudentController@LoginStudent');
-// 	Route::post('/LoginStudent','StudentController@RegisterStudent')->name('siswa.store');
-
-
-// 	// Route::get('/StudentLogout','StudentController@LogoutStudent');
+	// Route::post('/StudentLoginPage','StudentController@LoginStudent');
+	// Route::post('/LoginStudent','StudentController@RegisterStudent')->name('siswa.store');
 
 
-// });
+	Route::get('/StudentLogout','StudentController@LogoutStudent');
+
+
+});
 
 Route::prefix('raport')->group(function(){
 	Route::get('/', 'RaportController@IndexGetRaport');
@@ -74,8 +74,11 @@ Route::prefix('raport')->group(function(){
 	Route::post('//importUts','RaportController@importNilai');
 });
 
-Route::get('/Dashboard','DashboardController@IndexDashboard');
-
+Route::get('/internal/internal-dashboard','DashboardController@IndexDashboard');
+Route::get('/student/student-view','DashboardSiswaController@IndexDashboardSiswa');
+// Route::get('/internal/internal-dashboard','DashboardController@TampilkanSession');
+// Route::get('/DashboardGuru','DashboardGuruController@IndexDashboardGuru');
+// Route::get('/DashboardAdmin','DashboardAdminController@IndexDashboardAdmin');
 // Route::get('/', function () {
 //     return redirect('/student/LoginStudent');
 // });

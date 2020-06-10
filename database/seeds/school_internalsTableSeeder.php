@@ -12,11 +12,11 @@ class school_internalsTableSeeder extends Seeder
     public function run()
     
     {
-    	DB::table('school_internals')->insert(['name' => 'adi',
+    	DB::table('school_internals')->insert(['name' => 'Dina',
     		'email' => 'adiputra5249@gmail.com',
     		'phone' => '081286949930',
     		'password' => Hash::make('localhostPassword'),
-    		'role_id' =>'1'
+    		'role_id' =>'2'
 
     ]);
 

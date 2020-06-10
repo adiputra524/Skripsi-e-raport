@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Role;
+use Session;
 class RolesController extends Controller
 {
     public function IndexRoles()

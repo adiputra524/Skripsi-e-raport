@@ -29,7 +29,7 @@ class LoginSchoolController extends Controller
 			$error = $validate->errors()->first();
 
 			Session::flash('error',$error);
-			return redirect('auth/Login');
+			return redirect('auth/LoginPage');
 		}
 
 		$data = DB::table('school_internals')
@@ -38,19 +38,16 @@ class LoginSchoolController extends Controller
 
 		if(!isset($data)){
 			Session::flash('error','Autentikasi error! Cek kembali username dan kata sandi anda');
-			return redirect('auth/Login');
+			return redirect('auth/LoginPage');
 		}
 
 		if(!Hash::check($request->get('password'),$data->password)){
 			Session::flash('error','Kata sandi salah ! Cek kembali kata sandi anda!');
-			return redirect('auth/Login');
+			return redirect('auth/LoginPage');
 		}
 
 		Session::put('school_internals',$data);
-		return redirect('Dashboard');
-		
-
-
+		return redirect('internal/internal-dashboard');
 	}
 
 	// public function RegisterSchool()

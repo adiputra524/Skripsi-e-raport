@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
 class tbl_studentsTableSeeder extends Seeder
 {
     /**
@@ -11,15 +10,17 @@ class tbl_studentsTableSeeder extends Seeder
      */
     public function run()
     {
-    //     DB::table('tbl_students')->insert(['nama' => 'adi',
-    // 		'nisn' => '2001567982',
-    // 		'nis' => '20015678092',
-    // 		'email' => 'adiputra52429@gmail.com'
-    // 		'password' => 
-    // 		'phone' =>
-    // 		'profile_picture' =>
-    // 		'class_id' =>
+        DB::table('tbl_students')->insert([
+            'nama' => 'alex',
+    		'nis' => '20015678092',
+    		'email' => 'alex52429@gmail.com',
+    		'password' => Hash::make('Alex123'),
+    		'phone' => '08128319134',
+    		'class_id' =>'1',
+            'created_at' => new \DateTime('now'),
+            'updated_at' => new \DateTime('now')
 
-    // ]);
+
+    ]);
     }
 }
