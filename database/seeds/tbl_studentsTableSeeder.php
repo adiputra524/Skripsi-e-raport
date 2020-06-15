@@ -11,12 +11,12 @@ class tbl_studentsTableSeeder extends Seeder
     public function run()
     {
         DB::table('tbl_students')->insert([
-            'nama' => 'alex',
-    		'nis' => '20015678092',
-    		'email' => 'alex52429@gmail.com',
+            'nama' => 'dina',
+    		'nis' => '20015678093',
+    		'email' => 'dina52424@gmail.com',
     		'password' => Hash::make('Alex123'),
     		'phone' => '08128319134',
-    		'class_id' =>'1',
+    		'class_id' =>'2',
             'created_at' => new \DateTime('now'),
             'updated_at' => new \DateTime('now')
 

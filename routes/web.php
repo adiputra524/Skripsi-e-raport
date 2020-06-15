@@ -25,16 +25,21 @@ Route::prefix('roles')->group(function(){
 });
 
 Route::prefix('auth')->group(function(){
-	Route::get('/LoginPage','LoginSchoolController@IndexLogin');
+	Route::get('/LoginPage','SchoolInternalController@IndexLogin');
 	
-	Route::post('/Login','LoginSchoolController@LoginSchool');
+	Route::post('/Login','SchoolInternalController@LoginSchool');
 	
-	// Route::get('/register','LoginSchoolController@RegisterSchool');
+	
 
-	Route::get('/logout','LoginSchoolController@LogoutSchool');
+	Route::get('/logout','SchoolInternalController@LogoutSchool');
 
-// Route::post('/register','LoginSchoolController@RegisterSchool');
+	Route::get('/internal/inputGuru','SchoolInternalController@IndexGetGuru');
 
+	Route::post('/internal/inputGuru','SchoolInternalController@storeGuru');
+
+	Route::get('internal/inputGuru/hapus/{id}','SchoolInternalController@deleteGuru');
+
+	
 
 
 
@@ -47,7 +52,7 @@ Route::prefix('kelas')->group(function()
 	Route::post('/','KelasController@storeKelas');
 	Route::get('//edit/{id}','KelasController@editKelas');
 	Route::put('//update/{id}','KelasController@updateKelas');
-	Route::get('///{}','KelasController@deleteKelas');
+	Route::get('//hapus/{id}','KelasController@deleteKelas');
 
 
 
@@ -57,10 +62,19 @@ Route::prefix('kelas')->group(function()
 Route::prefix('student')->group(function(){
 	Route::get('/LoginStudent','StudentController@IndexLoginStudent');
 	Route::post('/StudentLoginPage','StudentController@LoginStudent');
-	// Route::get('/LoginPageStudent','StudentController@RegisterStudent');
 
-	// Route::post('/StudentLoginPage','StudentController@LoginStudent');
-	// Route::post('/LoginStudent','StudentController@RegisterStudent')->name('siswa.store');
+
+	Route::get('/internal/inputSiswa','StudentController@IndexGetSiswa');
+	
+	Route::post('/internal/inputSiswa','StudentController@storeSiswa');
+	Route::get('//edit/{id}','StudentController@editSiswa');
+	Route::put('//update/{id}','StudentController@updateSiswa');
+	Route::get('internal/inputSiswa/hapus/{id}','StudentController@deleteSiswa');
+
+	Route::get('/internal/DaftarSiswaKelas10','StudentController@DataSiswaKelas10');
+	Route::get('/internal/DaftarSiswaKelas11','StudentController@DataSiswaKelas11');
+	Route::get('/internal/DaftarSiswaKelas12','StudentController@DataSiswaKelas12');
+
 
 
 	Route::get('/StudentLogout','StudentController@LogoutStudent');
@@ -76,12 +90,11 @@ Route::prefix('raport')->group(function(){
 
 Route::get('/internal/internal-dashboard','DashboardController@IndexDashboard');
 Route::get('/student/student-view','DashboardSiswaController@IndexDashboardSiswa');
-// Route::get('/internal/internal-dashboard','DashboardController@TampilkanSession');
-// Route::get('/DashboardGuru','DashboardGuruController@IndexDashboardGuru');
-// Route::get('/DashboardAdmin','DashboardAdminController@IndexDashboardAdmin');
-// Route::get('/', function () {
-//     return redirect('/student/LoginStudent');
-// });
+
+
+Route::post('reset_password_wihout_token',
+	'ForgotPasswordController@validatePasswordRequest');
+Route::post('reset_password_with_token','ForgotPasswordController@resetPassword');
 
 Route::get('/', function () {
 	return redirect('/auth/LoginPage');

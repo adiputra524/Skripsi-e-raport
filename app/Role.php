@@ -12,7 +12,3 @@ class Role extends Model
 
 }
 
-public function school_internal()
-{
-	return $this->belongsTo('App\Role');
-}

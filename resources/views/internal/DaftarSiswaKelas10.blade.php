@@ -2,12 +2,11 @@
 <html>
 <head>
   <title>
-    Dashboard
+    Siswa Kelas 10
   </title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
   
   <!-- font -->
   <link rel="stylesheet" type="text/css" href="{{asset('/css/all.min.css')}}">
@@ -40,8 +39,13 @@
   <!-- AdminLTE App -->
   <script type="text/javascript" src="{{asset('/js/adminlte.js')}}"></script>
   <!-- graph -->
-  <script type="text/javascript" src="{{asset('js/graph-v3.js')}}"></script>
-  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  
+  
+  <!-- JSON -->
+  <script type="text/javascript" src="{{asset('js/ajax-load.js')}}"></script>
+
+  <script type="text/javascript" src="{{asset('js/al-g-kls.js')}}"></script>
+
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -52,13 +56,13 @@
       <!-- Left navbar links -->
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="ion-android-menu"></i></a>
         </li>
 
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
-            <i class="far fa-bell"></i>
+            <i class="ion-android-notifications-none"></i>
             <span class="badge badge-warning navbar-badge">3</span>
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left">
@@ -101,7 +105,7 @@
               <img src="{{asset('/image/sasuke.jpg')}}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-              <a href="#" class="d-block">{{Session::get('tbl_students')->nama }}</a>
+              <a href="#" class="d-block">{{ Session::get('school_internals')->name }}</a>
             </div>
           </div>
 
@@ -111,7 +115,7 @@
             <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
              <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="/internal/internal-dashboard" class="nav-link">
                 <i class="nav-icon ion-android-home"></i>
                 <p>
                   Home
@@ -128,33 +132,22 @@
               </a>
               <ul class="nav nav-treeview">
 
+               
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <p>Kelas 10</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="/student/internal/DaftarSiswaKelas11" class="nav-link">
                     <p>Kelas 11</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="/student/internal/DaftarSiswaKelas12" class="nav-link">
                     <p>Kelas 12</p>
                   </a>
                 </li>
               </ul>
             </li>
+            
             <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="ion-android-people"></i>
-                <p>
-                  List Guru
-                </p>
-              </a>
-            </li> 
-            <li class="nav-item">
-              <a href="/student/StudentLogout" class="nav-link">
+              <a href="/auth/logout" class="nav-link">
                 <i class="nav-icon ion-log-out"></i>
                 <p>
                   Log Out
@@ -176,7 +169,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0 text-dark">Dashboard</h1>
+              <h1 class="m-0 text-dark">Daftar Siswa Kelas 10</h1>
             </div><!-- /.col -->
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -191,20 +184,43 @@
           <div class="row">
             <!-- Left col -->
             <section class="col-lg-12">
-              <div id="chartContainer" style="height: 500px; width: 100%;"></div>
+              <div class="card-body">
+                <table class="table table-bordered table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Nama</th>
+                      <th>NIS</th>
+
+                    </tr>
+                  </thead>
+                  <tbody`>
+                  @foreach($tbl_student as $row)
+                  <tr>
+                    <td>{{$row->id}}</td>
+                    <td>{{$row->nama}}</td>
+                    <td>{{$row->nis}}</td>
+                  </tr>
+                  @endforeach
+
+
+                </tbody>
+              </table>
+
+            </div>
 
 
 
-            </section>
-            <!-- /.Left col -->
+          </section>
+          <!-- /.Left col -->
 
-          </div>
-          <!-- /.row (main row) -->
-        </div><!-- /.container-fluid -->
-      </section>
-      <!-- /.content -->
-    </div>
+        </div>
+        <!-- /.row (main row) -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
   </div>
+</div>
 
 </body>
 </html>

@@ -11,7 +11,3 @@ class SchoolInternal extends Model
 }
 
 
-public function role()
-{
-	return $this->hasOne('App\Role','role_id');
-}

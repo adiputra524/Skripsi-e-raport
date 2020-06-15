@@ -22,8 +22,8 @@ class CreateSchoolInternalsTable extends Migration
             $table->string('password',255);
             // $table->string('profile_picture',255);
             $table->foreignId('role_id');
-            // $table->dateTime('created_at');
-            // $table->dateTime('updated_at');
+            $table->dateTime('created_at');
+            $table->dateTime('updated_at');
 
             //$table->timestamps();
 

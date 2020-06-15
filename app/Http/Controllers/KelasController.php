@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Kelas;
+use App\TblStudent;
 use Illuminate\Support\Facades\DB;
 class KelasController extends Controller
 {
@@ -66,6 +67,25 @@ class KelasController extends Controller
     	$kelas->delete();
     	return redirect('');
     }
+
+
+
+    public function JoinTableStudent()
+    {
+        $data=DB::table('kelas AS k')
+        ->select('*')
+        ->join('tbl_students','class_id','=','k.id')
+        ->get();
+
+        echo json_encode($data);
+
+        dd($data);
+
+        
+    }
+
+    
+
 
 
 }
