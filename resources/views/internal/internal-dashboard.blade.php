@@ -56,35 +56,7 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="ion-android-menu"></i></a>
-        </li>
-
-        <!-- Notifications Dropdown Menu -->
-        <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#">
-            <i class="ion-android-notifications-none"></i>
-            <span class="badge badge-warning navbar-badge">3</span>
-          </a>
-          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left">
-            <!-- <span class="dropdown-item dropdown-header">15 Notifications</span> -->
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item">
-              Profile has been updated!
-              <span class="float-right text-muted text-sm">3 mins</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item">
-              Raport has been reviewed!
-              <span class="float-right text-muted text-sm">12 hours</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item">
-              Rapor updated!
-              <span class="float-right text-muted text-sm">2 days</span>
-            </a>
-            <div class="dropdown-divider"></div>
-        </li>
-
-        
+        </li>   
       </ul>  
     </nav>
      <!-- Main Sidebar Container -->
@@ -202,7 +174,7 @@
     </div>
     </div>
     @else
-
+<!--ini buat admin-->
   <div class="wrapper">
       <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -213,30 +185,7 @@
       </li>
 
       <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="ion-android-notifications-none"></i>
-          <span class="badge badge-warning navbar-badge">3</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left">
-          <!-- <span class="dropdown-item dropdown-header">15 Notifications</span> -->
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item">
-            Profile has been updated!
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item">
-            Raport has been reviewed!
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item">
-            Rapor updated!
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-      </li>
+      
 
       
     </ul>  

@@ -131,17 +131,17 @@
             <ul class="nav nav-treeview">
             
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/student/internal/DaftarSiswaKelas10" class="nav-link">
                   <p>Kelas 10</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/student/internal/DaftarSiswaKelas11" class="nav-link">
                   <p>Kelas 11</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/student/internal/DaftarSiswaKelas12" class="nav-link">
                   <p>Kelas 12</p>
                 </a>
               </li>
@@ -159,7 +159,12 @@
             
               <li class="nav-item">
                 <a href="/auth/internal/inputGuru" class="nav-link">
-                  <p>Akun Guru</p>
+                  <p>Akun Wali Kelas</p>
+                </a>
+              </li>
+               <li class="nav-item">
+                <a href="/student/internal/inputSiswa" class="nav-link">
+                  <p>Akun Siswa</p>
                 </a>
               </li>
             </ul>

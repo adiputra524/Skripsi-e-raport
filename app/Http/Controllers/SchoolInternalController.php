@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\SchoolInternal;
 use App\Role;
+
 use Validator;
 use Session;
 use Illuminate\Support\Facades\Hash;
@@ -74,6 +75,8 @@ class SchoolInternalController extends Controller
 		->where('role_id','!=','1')
 		->get();
 
+
+
 		return view('/internal/inputGuru',compact('school_internal'));
 	}
 
@@ -119,6 +122,9 @@ class SchoolInternalController extends Controller
 		$school_internal -> delete();
 		return redirect('/auth/internal/inputGuru');
 	}
+
+
+
 
 
 	

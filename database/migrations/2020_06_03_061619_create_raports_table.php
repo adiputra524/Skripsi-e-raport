@@ -17,11 +17,8 @@ class CreateRaportsTable extends Migration
        Schema::create('raports', function (Blueprint $table) {
         $table->id();
         $table->foreignId('student_id');
-        $table->float('nilai_uts',0,4);
-        $table->float('nilai_uas',0,4);
         $table->dateTime('created_at');
         $table->dateTime('updated_at');
-
         $table->foreign('student_id')->references('id')->on('tbl_students');
 
         // $table->timestamps();

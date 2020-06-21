@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>
-    Format Dashboard Siswa
+    Nilai Siswa
   </title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,13 +16,13 @@
   <link rel="stylesheet" type="text/css" href="{{asset('/css/adminlte.min.css')}}">
   <!-- iCheck -->
   <link rel="stylesheet" type="text/css" href="{{asset('/css/icheck-bootstrap.min.css')}}">
- 
+
   
   <!-- google font -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- overlay scrollbars -->
-   <link rel="stylesheet" type="text/css" href="{{asset('/css/OverlayScrollbars.min.css')}}">
- 
+  <link rel="stylesheet" type="text/css" href="{{asset('/css/OverlayScrollbars.min.css')}}">
+
   
   <!-- jQuery -->
   <script type="text/javascript" src="{{asset('/js/jquery.min.js')}}"></script>
@@ -38,10 +38,8 @@
   <script type="text/javascript" src="{{asset('/js/jquery.overlayScrollbars.min.js')}}"></script>
   <!-- AdminLTE App -->
   <script type="text/javascript" src="{{asset('/js/adminlte.js')}}"></script>
-  <!-- graph -->
-  <script type="text/javascript" src="{{asset('js/graph-v3.js')}}"></script>
-  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-
+  
+  <!-- ajax load -->
   <script type="text/javascript" src="{{asset('js/al-nilai-s-kls10.js')}}"></script>
 
 
@@ -49,42 +47,47 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 
   <div class="wrapper">
-      <!-- Navbar -->
+    <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
       <!-- Left navbar links -->
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="ion-android-menu"></i></a>
         </li>
-      </ul>  
-    </nav>
-     <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <!-- Brand Logo -->
-      <a href="#" class="brand-link">
-        <img src="{{asset('/image/kanaan school logo.png')}}" alt="kanaan-school" class="brand-image img-circle"
-             style="opacity: .8">
-        <span class="brand-text font-weight-light">Kanaan School</span>
-      </a>
 
-      <!-- Sidebar -->
-      <div class="sidebar">
-        <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <div class="image">
-            <img src="{{asset('/image/sasuke.jpg')}}" class="img-circle elevation-2" alt="User Image">
-          </div>
-          <div class="info">
-            <a href="#" class="d-block">{{Session::get('tbl_students')->nama}}</a>
-          </div>
-        </div>
+        <!-- Notifications Dropdown Menu -->
+      
 
-        <!-- Sidebar Menu -->
-        <nav class="mt-2">
-          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+        </ul>  
+      </nav>
+      <!-- Main Sidebar Container -->
+      <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="#" class="brand-link">
+          <img src="{{asset('/image/kanaan school logo.png')}}" alt="kanaan-school" class="brand-image img-circle"
+          style="opacity: .8">
+          <span class="brand-text font-weight-light">Kanaan School</span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <!-- Sidebar user panel (optional) -->
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <img src="{{asset('/image/sasuke.jpg')}}" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+              <a href="#" class="d-block">{{Session::get('tbl_students')->nama }}</a>
+            </div>
+          </div>
+
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
-                 with font-awesome or any other icon font library -->
-            <li class="nav-item">
+             with font-awesome or any other icon font library -->
+             <li class="nav-item">
               <a href="/student/student-view" class="nav-link">
                 <i class="nav-icon ion-android-home"></i>
                 <p>
@@ -101,7 +104,7 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
-              
+
                 <li class="nav-item">
                   <a href="/student/nilaiSiswa/NilaiSiswaKelas10" class="nav-link">
                     <p>Kelas 10</p>
@@ -128,7 +131,7 @@
               </a>
             </li> 
             <li class="nav-item">
-              <a href="/password/Siswa/ChangePassword" class="nav-link">
+              <a href="#" class="nav-link">
                 <i class="nav-icon ion-android-lock"></i>
                 <p>
                   Change Password
@@ -158,7 +161,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0 text-dark">Judul Page</h1>
+              <h1 class="m-0 text-dark">Nilai Siswa (Kelas 10)</h1>
             </div><!-- /.col -->
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -168,17 +171,50 @@
       <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
-         
+
           <!-- Main row -->
           <div class="row">
-           
-          </div>
-          <!-- /.row (main row) -->
-        </div><!-- /.container-fluid -->
-      </section>
-      <!-- /.content -->
-    </div>
+            <!-- Left col -->
+            <section class="col-lg-12">
+              <div class="card-body table-responsive-sm">
+                <table class="table table-bordered table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Mata Pelajaran</th>
+                      <th>UTS</th>
+                      <th>UAS</th>
+                      <th>Catatan</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                   @foreach($mata_pelajaran as $row)
+                   <tr>
+                    <td>{{$row->id}}</td>
+                    <td>{{$row->nama_mata_pelajaran}}</td>
+                    <td>{{$row->nilai_uts}}</td>
+                    <td>{{$row->nilai_uas}}</td>
+                    <td>{{$row->catatan}}</td>
+                  </tr>
+
+                  @endforeach
+
+
+                </tbody>
+              </table>
+
+            </div>
+          </section>
+          <!-- /.Left col -->
+
+        </div>
+        <!-- /.row (main row) -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
   </div>
+</div>
 
 </body>
 </html> 

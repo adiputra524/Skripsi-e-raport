@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>
-    Format Dashboard Siswa
+    Nilai Siswa
   </title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,11 +38,9 @@
   <script type="text/javascript" src="{{asset('/js/jquery.overlayScrollbars.min.js')}}"></script>
   <!-- AdminLTE App -->
   <script type="text/javascript" src="{{asset('/js/adminlte.js')}}"></script>
-  <!-- graph -->
-  <script type="text/javascript" src="{{asset('js/graph-v3.js')}}"></script>
-  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-
-  <script type="text/javascript" src="{{asset('js/al-nilai-s-kls10.js')}}"></script>
+  
+  <!-- ajax load -->
+   <script type="text/javascript" src="{{asset('js/al-nilai-s-kls10.js')}}"></script>
 
 
 </head>
@@ -56,13 +54,17 @@
         <li class="nav-item">
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="ion-android-menu"></i></a>
         </li>
+
+        <!-- Notifications Dropdown Menu -->
+       
+        
       </ul>  
     </nav>
      <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="#" class="brand-link">
-        <img src="{{asset('/image/kanaan school logo.png')}}" alt="kanaan-school" class="brand-image img-circle"
+        <img src="Dashboard-v2-Assets/kanaan school logo.png" alt="kanaan-school" class="brand-image img-circle"
              style="opacity: .8">
         <span class="brand-text font-weight-light">Kanaan School</span>
       </a>
@@ -72,10 +74,10 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
-            <img src="{{asset('/image/sasuke.jpg')}}" class="img-circle elevation-2" alt="User Image">
+            <img src="Dashboard-v2-Assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block">{{Session::get('tbl_students')->nama}}</a>
+            <a href="#" class="d-block">Alexander Pierce</a>
           </div>
         </div>
 
@@ -127,8 +129,8 @@
                 </p>
               </a>
             </li> 
-            <li class="nav-item">
-              <a href="/password/Siswa/ChangePassword" class="nav-link">
+             <li class="nav-item">
+              <a href="#" class="nav-link">
                 <i class="nav-icon ion-android-lock"></i>
                 <p>
                   Change Password
@@ -158,7 +160,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0 text-dark">Judul Page</h1>
+              <h1 class="m-0 text-dark">Nilai Siswa (Kelas 12)</h1>
             </div><!-- /.col -->
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -171,6 +173,29 @@
          
           <!-- Main row -->
           <div class="row">
+            <!-- Left col -->
+            <section class="col-lg-12">
+                  <div class="card-body table-responsive-sm">
+                      <table class="table table-bordered table-hover table-striped">
+                          <thead>
+                              <tr>
+                                  <th scope="col">#</th>
+                                  <th>Mata Pelajaran</th>
+                                  <th scope="col">UTS</th>
+                                  <th scope="col">UAS</th>
+                                  <th>Catatan</th>
+
+                              </tr>
+                          </thead>
+                          <tbody id="myTable">
+
+                              
+                          </tbody>
+                      </table>
+                             
+                  </div>
+            </section>
+            <!-- /.Left col -->
            
           </div>
           <!-- /.row (main row) -->

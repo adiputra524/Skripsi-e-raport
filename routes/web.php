@@ -39,11 +39,17 @@ Route::prefix('auth')->group(function(){
 
 	Route::get('internal/inputGuru/hapus/{id}','SchoolInternalController@deleteGuru');
 
+	Route::get('/internal/DaftarNilaiKelas10','mata_pelajaranController@exportNilai10');
+
+	Route::get('/internal/DaftarNilaiKelas10','mata_pelajaranController@exportNilai11');
+
+	Route::get('/internal/DaftarNilaiKelas10','mata_pelajaranController@exportNilai12');
+
 	
 
 
-
 });
+
 
 Route::prefix('kelas')->group(function()
 {
@@ -65,8 +71,12 @@ Route::prefix('student')->group(function(){
 
 
 	Route::get('/internal/inputSiswa','StudentController@IndexGetSiswa');
+
+	Route::get('/siswa/DataWaliKelas','StudentController@getDataWalikelas');
+	Route::get('/nilaiSiswa/NilaiSiswaKelas10','StudentController@getNilaiSiswaKelas10');
 	
 	Route::post('/internal/inputSiswa','StudentController@storeSiswa');
+
 	Route::get('//edit/{id}','StudentController@editSiswa');
 	Route::put('//update/{id}','StudentController@updateSiswa');
 	Route::get('internal/inputSiswa/hapus/{id}','StudentController@deleteSiswa');
@@ -80,12 +90,38 @@ Route::prefix('student')->group(function(){
 	Route::get('/StudentLogout','StudentController@LogoutStudent');
 
 
+
+
 });
 
 Route::prefix('raport')->group(function(){
-	Route::get('/', 'RaportController@IndexGetRaport');
-	Route::get('/{type}','RaportController@DownloadDataNilai');
-	Route::post('//importUts','RaportController@importNilai');
+	Route::get('/internal/DaftarNilaiKelas10','RaportController@GetTahunAjaran');
+	Route::get('//edit/{id}','RaportController@editNilai');
+	Route::put('//update/{id}','RaportController@updateNilai');
+	Route::get('///','RaportController@deleteNilai');
+});
+
+Route::prefix('raportHeader')->group(function(){
+
+	// Route::get('/internal/DaftarNilaiKelas10','mata_pelajaranController@IndexGetMataPelajaran');
+
+});
+
+
+Route::prefix('pelajaran')->group(function(){
+
+	Route::get('/internal/DaftarNilaiKelas10','mata_pelajaranController@IndexGetMataPelajaranKelas10');
+	Route::get('/internal/DaftarNilaiKelas11','mata_pelajaranController@IndexGetMataPelajaranKelas11');
+	Route::get('/internal/DaftarNilaiKelas12','mata_pelajaranController@IndexGetMataPelajaranKelas12');
+
+    Route::post('/internal/DaftarNilaiKelas10','mata_pelajaranController@storeMataPelajaran');
+});
+
+Route::prefix('password')->group(function(){
+
+	Route::get('/Siswa/ChangePassword','ChangePasswordController@editChangePassword');
+	Route::patch('/student/UpdatePassword','ChangePasswordController@update');
+
 });
 
 Route::get('/internal/internal-dashboard','DashboardController@IndexDashboard');

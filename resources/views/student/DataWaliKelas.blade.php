@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>
-    Akun Wali Kelas
+  Data WaliKelas
   </title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -80,7 +80,7 @@
               <img src="{{asset('/image/sasuke.jpg')}}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-              <a href="#" class="d-block">{{Session::get('school_internals')->name }}</a>
+              <a href="#" class="d-block">{{Session::get('tbl_students')->nama }}</a>
             </div>
           </div>
 
@@ -90,7 +90,7 @@
           <!-- Add icons to the links using the .nav-icon class
            with font-awesome or any other icon font library -->
            <li class="nav-item">
-            <a href="/internal/internal-dashboard" class="nav-link">
+            <a href="/student/student-view" class="nav-link">
               <i class="nav-icon ion-android-home"></i>
               <p>
                 Home
@@ -124,37 +124,30 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon ion-android-people"></i>
-              <p>
-                Manage
-                <i class="right ion-android-arrow-dropleft"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-
-              <li class="nav-item">
-                <a href="/auth/internal/inputGuru" class="nav-link">
-                  <p>Akun Wali Kelas</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/student/internal/inputSiswa" class="nav-link">
-                  <p>Akun Siswa</p>
-                </a>
-              </li>
-            </ul>
-          </li>
           <li class="nav-item">
-            <a href="/auth/logout" class="nav-link">
+              <a href="/student/siswa/DataWaliKelas" class="nav-link">
+                <i class="ion-android-people"></i>
+                <p>
+                  List Guru
+                </p>
+              </a>
+            </li> 
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon ion-android-lock"></i>
+                <p>
+                  Change Password
+                </p>
+              </a>
+            </li>
+         <li class="nav-item">
+            <a href="/student/StudentLogout" class="nav-link">
               <i class="nav-icon ion-log-out"></i>
               <p>
                 Log Out
               </p>
             </a>
           </li>
-          
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -169,7 +162,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Daftar Guru</h1>
+            <h1 class="m-0 text-dark">Data Walikelas</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
         @isset($success)
@@ -207,9 +200,7 @@
           @csrf
 
           <div class="card-body">
-           Input Guru <input type="file" name="select_file">
-           <td width="30%" align="Left">
-            <input type="submit" name="upload" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" class="btn btn-primary" value="Upload">
+
             
           </div>
         </form>
@@ -221,7 +212,6 @@
             <tr>
               <th>#</th>
               <th>Nama</th>
-              <th>Email</th>
               <th>Nomer Telpon</th>
 
             </tr>
@@ -233,12 +223,8 @@
             <tr>
               <td>{{$row->id}}</td>
               <td>{{$row->name}}</td>
-              <td>{{$row->email}}</td>
               <td>{{$row->phone}}</td>
               <td>
-                <a href="#route-update" class="btn btn-warning">Edit</a>
-                <a href="/auth/internal/inputGuru/hapus/{{$row->id}}
-                  " class="btn btn-danger">Hapus</a>
                 </td>
               </tr>
               @endforeach

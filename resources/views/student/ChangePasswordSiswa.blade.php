@@ -2,27 +2,29 @@
 <html>
 <head>
   <title>
-    Format Dashboard Siswa
+   Password Change
   </title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <!-- font -->
-  <link rel="stylesheet" type="text/css" href="{{asset('/css/all.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('/css/all.min.css')}}">
   <!-- icon -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- main css -->
   <link rel="stylesheet" type="text/css" href="{{asset('/css/adminlte.min.css')}}">
   <!-- iCheck -->
   <link rel="stylesheet" type="text/css" href="{{asset('/css/icheck-bootstrap.min.css')}}">
- 
+
+  <link rel="stylesheet" type="text/css" href="{{asset('/css/change-password.css')}}">
+
   
   <!-- google font -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- overlay scrollbars -->
-   <link rel="stylesheet" type="text/css" href="{{asset('/css/OverlayScrollbars.min.css')}}">
- 
+  <link rel="stylesheet" type="text/css" href="{{asset('/css/OverlayScrollbars.min.css')}}">
+
   
   <!-- jQuery -->
   <script type="text/javascript" src="{{asset('/js/jquery.min.js')}}"></script>
@@ -38,10 +40,12 @@
   <script type="text/javascript" src="{{asset('/js/jquery.overlayScrollbars.min.js')}}"></script>
   <!-- AdminLTE App -->
   <script type="text/javascript" src="{{asset('/js/adminlte.js')}}"></script>
-  <!-- graph -->
-  <script type="text/javascript" src="{{asset('js/graph-v3.js')}}"></script>
-  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-
+  
+  <!-- ajax load -->
+  
+ 
+  
+  <!-- ajax load -->
   <script type="text/javascript" src="{{asset('js/al-nilai-s-kls10.js')}}"></script>
 
 
@@ -56,6 +60,11 @@
         <li class="nav-item">
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="ion-android-menu"></i></a>
         </li>
+
+        <!-- Notifications Dropdown Menu -->
+       
+
+        
       </ul>  
     </nav>
      <!-- Main Sidebar Container -->
@@ -75,7 +84,7 @@
             <img src="{{asset('/image/sasuke.jpg')}}" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block">{{Session::get('tbl_students')->nama}}</a>
+            <a href="#" class="d-block">{{ Session::get('tbl_students')->nama }}</a>
           </div>
         </div>
 
@@ -85,7 +94,7 @@
             <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
             <li class="nav-item">
-              <a href="/student/student-view" class="nav-link">
+              <a href="#" class="nav-link">
                 <i class="nav-icon ion-android-home"></i>
                 <p>
                   Home
@@ -103,32 +112,32 @@
               <ul class="nav nav-treeview">
               
                 <li class="nav-item">
-                  <a href="/student/nilaiSiswa/NilaiSiswaKelas10" class="nav-link">
+                  <a href="#" class="nav-link">
                     <p>Kelas 10</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="/student/nilaiSiswa/NilaiSiswaKelas11" class="nav-link">
+                  <a href="#" class="nav-link">
                     <p>Kelas 11</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="/student/nilaiSiswa/NilaiSiswaKelas12" class="nav-link">
+                  <a href="#" class="nav-link">
                     <p>Kelas 12</p>
                   </a>
                 </li>
               </ul>
             </li>
             <li class="nav-item">
-              <a href="/student/siswa/DataWaliKelas" class="nav-link">
-                <i class="ion-android-people"></i>
+              <a href="#" class="nav-link">
+                <i class="nav-icon ion-android-people"></i>
                 <p>
                   List Guru
                 </p>
               </a>
             </li> 
             <li class="nav-item">
-              <a href="/password/Siswa/ChangePassword" class="nav-link">
+              <a href="#" class="nav-link">
                 <i class="nav-icon ion-android-lock"></i>
                 <p>
                   Change Password
@@ -136,7 +145,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="/student/StudentLogout" class="nav-link">
+              <a href="#" class="nav-link">
                 <i class="nav-icon ion-log-out"></i>
                 <p>
                   Log Out
@@ -158,7 +167,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0 text-dark">Judul Page</h1>
+              <h1 class="m-0 text-dark">Change Password</h1>
             </div><!-- /.col -->
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -168,10 +177,21 @@
       <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
-         
+         <form method="POST" action="('/password/student/UpdatePassword')">
+         	@method('patch')
+         	@csrf
           <!-- Main row -->
           <div class="row">
-           
+            <div class="register">
+              <div id="password-form">
+                <input type="password" name="new-password" maxlength="#maxlength" size="50" id="password-field" class="password-form-field" placeholder="New Password">
+
+                <input type="password" name="conf-password" maxlength="#maxlength" size="50" id="password-field" class="password-form-field" placeholder="Confirm Password">
+              </div>
+              
+              <button type="submit" id="submit-button">Submit</button>
+            </div>
+
           </div>
           <!-- /.row (main row) -->
         </div><!-- /.container-fluid -->

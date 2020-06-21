@@ -8,10 +8,14 @@ function load_ajax(){
 			   document.getElementById('myTable').innerHTML +=
 			   
 				'<td>'+ data[i].id +'</td>'+
-				'<td>'+ data[i].nama +'</td>'+
 				'<td>'+ data[i].nis +'</td>'+
+				'<td>'+ data[i].nama +'</td>'+
+				'<td>'+ data[i].grade +'</td>'+
+				'<td>'+ data[i].email +'</td>'+
+				'<td>'+ data[i].phone +'</td>'+
 				'<td>'+ 
-				'<a href="#route-update{{'+ data[i].id +'}}" class="btn btn-info">Detail Nilai</a>'+
+				'<a href="#route-update{{'+ data[i].id +'}}" class="btn btn-primary">Export</a>'+
+				'<a href="#route-delete{{'+ data[i].id +'}}" class="btn btn-secondary">Import</a>'+
 				'</td>'
 				
 			   ;

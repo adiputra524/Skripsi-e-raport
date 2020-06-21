@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TblStudent;
+use App\SchoolInternal;
 use App\Kelas;
 use Session;
 use Illuminate\Support\Facades\Hash;
@@ -11,6 +12,9 @@ use Illuminate\Support\Facades\Validator;
 use DB;
 use App\Imports\TblStudentImport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Mata_pelajaran;
+use App\Rapor_header;
+use App\Raport;
 class StudentController extends Controller
 {
 
@@ -111,6 +115,61 @@ public function DataSiswaKelas12()
   return view('/internal/DaftarSiswaKelas12',compact('tbl_student'));
 }
 
+public function getDataWalikelas(Request $request)
+{
+
+  $school_internal = SchoolInternal::all();
+  $school_internal = DB::table('roles as r')
+  ->select('*')
+  ->join('school_internals','role_id','=','r.id')
+  ->where('role_id','!=','1')
+  ->get();
+
+
+
+  return view('/student/DataWaliKelas',compact('school_internal'));
+}
+
+public function getNilaiSiswaKelas10(Request $request)
+{
+  $mata_pelajaran = Mata_pelajaran::all();
+  $mata_pelajaran = DB::table('rapor_headers as rh')
+  ->select('*')
+  ->join('mata_pelajarans','rapor_header_id','=','rh.id')
+  ->get();
+
+  return view('/student/NilaiSiswaKelas10',compact('mata_pelajaran'));
+
+
+}
+
+public function getNilaiSiswaKelas11(Request $request)
+{
+  $mata_pelajaran = Mata_pelajaran::all();
+  $mata_pelajaran = DB::table('rapor_headers as rh')
+  ->select('*')
+  ->join('mata_pelajarans','rapor_header_id','=','rh.id')
+  ->get();
+
+  return view('/student/NilaiSiswaKelas11',compact('mata_pelajaran'));
+
+
+}
+
+public function getNilaiSiswaKelas12(Request $request)
+{
+  $mata_pelajaran = Mata_pelajaran::all();
+  $mata_pelajaran = DB::table('rapor_headers as rh')
+  ->select('*')
+  ->join('mata_pelajarans','rapor_header_id','=','rh.id')
+  ->get();
+
+  return view('/student/NilaiSiswaKelas12',compact('mata_pelajaran'));
+
+
+}
+
+
 
 
 public function storeSiswa(Request $request)
@@ -163,6 +222,7 @@ public function deleteSiswa($id)
   $tbl_students->delete();
   return redirect('/student/internal/inputSiswa');
 }
+
 
 
 
