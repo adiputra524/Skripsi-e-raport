@@ -236,7 +236,7 @@
               <td>{{$row->email}}</td>
               <td>{{$row->phone}}</td>
               <td>
-                <a href="#route-update" class="btn btn-warning">Edit</a>
+                <a href="/auth/internal/EditDataWalikelas/edit/{{$row->id}}" class="btn btn-warning">Edit</a>
                 <a href="/auth/internal/inputGuru/hapus/{{$row->id}}
                   " class="btn btn-danger">Hapus</a>
                 </td>

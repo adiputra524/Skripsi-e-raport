@@ -94,7 +94,7 @@
             <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="/student/student-view" class="nav-link">
                 <i class="nav-icon ion-android-home"></i>
                 <p>
                   Home
@@ -112,24 +112,24 @@
               <ul class="nav nav-treeview">
               
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="/student/nilaiSiswa/NilaiSiswaKelas10" class="nav-link">
                     <p>Kelas 10</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="/student/nilaiSiswa/NilaiSiswaKelas11" class="nav-link">
                     <p>Kelas 11</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="/student/nilaiSiswa/NilaiSiswaKelas12" class="nav-link">
                     <p>Kelas 12</p>
                   </a>
                 </li>
               </ul>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="/student/siswa/DataWaliKelas" class="nav-link">
                 <i class="nav-icon ion-android-people"></i>
                 <p>
                   List Guru
@@ -137,7 +137,7 @@
               </a>
             </li> 
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="/password/Siswa/ChangePassword" class="nav-link">
                 <i class="nav-icon ion-android-lock"></i>
                 <p>
                   Change Password
@@ -145,7 +145,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="/student/StudentLogout" class="nav-link">
                 <i class="nav-icon ion-log-out"></i>
                 <p>
                   Log Out
@@ -177,7 +177,7 @@
       <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
-         <form method="POST" action="('/password/student/UpdatePassword')">
+         <form method="POST" action="/password/student/UpdatePassword">
          	@method('patch')
          	@csrf
           <!-- Main row -->
@@ -193,6 +193,7 @@
             </div>
 
           </div>
+        </form>
           <!-- /.row (main row) -->
         </div><!-- /.container-fluid -->
       </section>

@@ -37,6 +37,10 @@ Route::prefix('auth')->group(function(){
 
 	Route::post('/internal/inputGuru','SchoolInternalController@storeGuru');
 
+	Route::get('/internal/EditDataWalikelas/edit/{id}','SchoolInternalController@editWalikelas');
+
+	Route::put('/update/{id}','SchoolInternalController@updateWalikelas');
+
 	Route::get('internal/inputGuru/hapus/{id}','SchoolInternalController@deleteGuru');
 
 	Route::get('/internal/DaftarNilaiKelas10','mata_pelajaranController@exportNilai10');
@@ -77,8 +81,11 @@ Route::prefix('student')->group(function(){
 	
 	Route::post('/internal/inputSiswa','StudentController@storeSiswa');
 
-	Route::get('//edit/{id}','StudentController@editSiswa');
-	Route::put('//update/{id}','StudentController@updateSiswa');
+	Route::get('/internal/EditDataSiswa/edit/{id}','StudentController@editSiswa');
+
+	Route::put('/update/{id}','StudentController@updateSiswa');
+
+
 	Route::get('internal/inputSiswa/hapus/{id}','StudentController@deleteSiswa');
 
 	Route::get('/internal/DaftarSiswaKelas10','StudentController@DataSiswaKelas10');
@@ -114,7 +121,7 @@ Route::prefix('pelajaran')->group(function(){
 	Route::get('/internal/DaftarNilaiKelas11','mata_pelajaranController@IndexGetMataPelajaranKelas11');
 	Route::get('/internal/DaftarNilaiKelas12','mata_pelajaranController@IndexGetMataPelajaranKelas12');
 
-    Route::post('/internal/DaftarNilaiKelas10','mata_pelajaranController@storeMataPelajaran');
+	Route::post('/internal/DaftarNilaiKelas10','mata_pelajaranController@storeMataPelajaran');
 });
 
 Route::prefix('password')->group(function(){

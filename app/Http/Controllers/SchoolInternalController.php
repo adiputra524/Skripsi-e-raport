@@ -88,33 +88,37 @@ class SchoolInternalController extends Controller
 		return redirect('/auth/internal/inputGuru')->with('success','Data Siswa Telah Masuk');
 	}
 
-	public function editSiswa($id)
+	public function editWalikelas($id)
 	{
-		$school_internal = SchoolInternal::find($id);
-		return view('',['' => $school_internal ]);
+		$walikelas = SchoolInternal::find($id);
+
+		return view('/internal/EditDataWalikelas',compact('walikelas'));
 	}
 
-	public function updateSiswa($id, Request $request)
+	public function updateWalikelas(Request $request, $id)
 	{
 		$this->validate($request,[
-			'name' => 'required',
+			'nama' => 'required',
 			'email' => 'required',
-			'phone' => 'required',
-			'password' => 'required',
-			'role_id' =>'required'
+			'phone' => 'required'
+
 		]);
 
-		$school_internal = SchoolInternal::find($id);
-		$school_internal->name = $request->name;
-		$school_internal->email = $request->email;
-		$school_internal->phone = $request->phone;
-		$school_internal->password = $request->password;
-		$school_internal->role_id = $request->role_id;
-		$school_internal->save();
-		return redirect('');
+
+
+		$walikelas = SchoolInternal::find($id);
+		$walikelas->nama = $request->nama;
+		$walikelas->email = $request->email;
+		$walikelas->phone = $request->phone;
+
+		$walikelas->save();
+
+		return redirect('/auth/internal/inputGuru')->with('data berhasil diubah');
 
 
 	}
+
+
 
 	public function deleteGuru($id)
 	{

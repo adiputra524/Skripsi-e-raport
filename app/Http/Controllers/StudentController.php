@@ -182,36 +182,37 @@ public function storeSiswa(Request $request)
 
 
 
+
 public function editSiswa($id)
 {
-  $tbl_students = TblStudent::find($id);
-  return view('',['' => $tbl_students]);
+  $students = TblStudent::find($id);
+
+  return view('/internal/EditDataSiswa',compact('students'));
 }
 
-public function updateSiswa($id, Request $request)
+public function updateSiswa(Request $request, $id)
 {
   $this->validate($request,[
-    'nama' =>'required',
     'nis' => 'required',
+    'nama' => 'required',
+    'class_id' => 'required',
     'email' => 'required',
-    'password' => 'required',
-    'phone' => 'required',
-    'class_id' => 'required'
-
-
+    'phone' => 'required'
 
   ]);
 
 
-  $tbl_students =  TblStudent::find($id);
-  $tbl_students->nama = $request->nama;
-  $tbl_students->nis=$request->nis;
-  $tbl_students->email=$request->email;
-  $tbl_students->password=$request->password;
-  $tbl_students->phone= $request->phone;
-  $tbl_students->class_id=$request->class_id;
-  $tbl_students->save();
-  return redirect('');
+
+  $students = TblStudent::find($id);
+  $students->nis = $request->nis;
+  $students->nama = $request->nama;
+  $students->class_id = $request->class_id;
+  $students->email = $request->email;
+  $students->phone = $request->phone;
+
+  $students->save();
+
+  return redirect('/student/internal/inputSiswa')->with('data berhasil diubah');
 
 
 }

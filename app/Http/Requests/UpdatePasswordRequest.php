@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+// use Illuminate\Support\Facades\Auth;
 use Session;
-class ChangePasswordRequest extends FormRequest
+class UpdatePasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,8 @@ class ChangePasswordRequest extends FormRequest
      */
     public function authorize()
     {
-        return Session::check();
+        // return Session::check();
+        return true;
     }
 
     /**
