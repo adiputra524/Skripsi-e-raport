@@ -123,6 +123,11 @@
                     <p>Kelas 12</p>
                   </a>
                 </li>
+                <li class="nav-item">
+                <a href="/pelajaran/internal/ImportNilai" class="nav-link">
+                  <p>Import Nilai</p>
+                </a>
+              </li>
               </ul>
             </li>
 
@@ -204,7 +209,7 @@
                     <td>{{$row->nama}}</td>
                     <td>{{$row->nis}}</td>
                     <td> 
-                      <a href="#route-update{{'+ data[i].id +'}}" class="btn btn-info">Detail Nilai</a>
+                      <a href="/pelajaran/internal/DaftarNilaiKelas12" class="btn btn-info">Detail Nilai</a>
                     </td>
                   </tr>
                   @endforeach
@@ -301,6 +306,11 @@
                     <p>Kelas 12</p>
                   </a>
                 </li>
+                <li class="nav-item">
+                <a href="/pelajaran/internal/ImportNilai" class="nav-link">
+                  <p>Import Nilai</p>
+                </a>
+              </li>
               </ul>
             </li>
             <li class="nav-item">

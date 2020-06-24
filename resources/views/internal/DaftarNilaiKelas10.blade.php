@@ -46,7 +46,7 @@
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-@if(Session::get('school_internals')->role_id == '1')
+  @if(Session::get('school_internals')->role_id == '1')
   <div class="wrapper">
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -59,32 +59,32 @@
         <!-- Notifications Dropdown Menu -->
         
 
-        </ul>  
-      </nav>
-      <!-- Main Sidebar Container -->
-      <aside class="main-sidebar sidebar-dark-primary elevation-4">
-        <!-- Brand Logo -->
-        <a href="#" class="brand-link">
-          <img src="{{asset('/image/kanaan school logo.png')}}" alt="kanaan-school" class="brand-image img-circle"
-          style="opacity: .8">
-          <span class="brand-text font-weight-light">Kanaan School</span>
-        </a>
+      </ul>  
+    </nav>
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a href="#" class="brand-link">
+        <img src="{{asset('/image/kanaan school logo.png')}}" alt="kanaan-school" class="brand-image img-circle"
+        style="opacity: .8">
+        <span class="brand-text font-weight-light">Kanaan School</span>
+      </a>
 
-        <!-- Sidebar -->
-        <div class="sidebar">
-          <!-- Sidebar user panel (optional) -->
-          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-              <img src="{{asset('/image/sasuke.jpg')}}" class="img-circle elevation-2" alt="User Image">
-            </div>
-            <div class="info">
-              <a href="#" class="d-block">{{ Session::get('school_internals')->name }}</a>
-            </div>
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+            <img src="{{asset('/image/sasuke.jpg')}}" class="img-circle elevation-2" alt="User Image">
           </div>
+          <div class="info">
+            <a href="#" class="d-block">{{ Session::get('school_internals')->name }}</a>
+          </div>
+        </div>
 
-          <!-- Sidebar Menu -->
-          <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
            with font-awesome or any other icon font library -->
            <li class="nav-item">
@@ -182,9 +182,9 @@
             Input Nilai <input type="file" name="select_file">
             <td width="30%" align="Left">
               <input type="submit" name="upload" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" class="btn btn-primary" value="Upload">
-
-            </div>
-          </form>
+            </form>
+          </div>
+          
           <a href="/auth/internal/DaftarNilaiKelas10" class="btn btn-secondary">Export</a>
           <!-- Main row -->
           <div class="row">
@@ -223,8 +223,8 @@
       <!-- /.content -->
     </div>
   </div>
-@else
-<div class="wrapper">
+  @else
+  <div class="wrapper">
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
       <!-- Left navbar links -->
@@ -236,32 +236,32 @@
         <!-- Notifications Dropdown Menu -->
         
 
-        </ul>  
-      </nav>
-      <!-- Main Sidebar Container -->
-      <aside class="main-sidebar sidebar-dark-primary elevation-4">
-        <!-- Brand Logo -->
-        <a href="#" class="brand-link">
-          <img src="{{asset('/image/kanaan school logo.png')}}" alt="kanaan-school" class="brand-image img-circle"
-          style="opacity: .8">
-          <span class="brand-text font-weight-light">Kanaan School</span>
-        </a>
+      </ul>  
+    </nav>
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a href="#" class="brand-link">
+        <img src="{{asset('/image/kanaan school logo.png')}}" alt="kanaan-school" class="brand-image img-circle"
+        style="opacity: .8">
+        <span class="brand-text font-weight-light">Kanaan School</span>
+      </a>
 
-        <!-- Sidebar -->
-        <div class="sidebar">
-          <!-- Sidebar user panel (optional) -->
-          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-              <img src="{{asset('/image/sasuke.jpg')}}" class="img-circle elevation-2" alt="User Image">
-            </div>
-            <div class="info">
-              <a href="#" class="d-block">{{ Session::get('school_internals')->name }}</a>
-            </div>
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+            <img src="{{asset('/image/sasuke.jpg')}}" class="img-circle elevation-2" alt="User Image">
           </div>
+          <div class="info">
+            <a href="#" class="d-block">{{ Session::get('school_internals')->name }}</a>
+          </div>
+        </div>
 
-          <!-- Sidebar Menu -->
-          <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
            with font-awesome or any other icon font library -->
            <li class="nav-item">

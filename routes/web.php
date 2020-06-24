@@ -45,9 +45,9 @@ Route::prefix('auth')->group(function(){
 
 	Route::get('/internal/DaftarNilaiKelas10','mata_pelajaranController@exportNilai10');
 
-	Route::get('/internal/DaftarNilaiKelas10','mata_pelajaranController@exportNilai11');
+	Route::get('/internal/DaftarNilaiKelas11','mata_pelajaranController@exportNilai11');
 
-	Route::get('/internal/DaftarNilaiKelas10','mata_pelajaranController@exportNilai12');
+	Route::get('/internal/DaftarNilaiKelas12','mata_pelajaranController@exportNilai12');
 
 	
 
@@ -117,11 +117,15 @@ Route::prefix('raportHeader')->group(function(){
 
 Route::prefix('pelajaran')->group(function(){
 
+Route::get('/internal/ImportNilai','mata_pelajaranController@IndexImportNilai');
 	Route::get('/internal/DaftarNilaiKelas10','mata_pelajaranController@IndexGetMataPelajaranKelas10');
 	Route::get('/internal/DaftarNilaiKelas11','mata_pelajaranController@IndexGetMataPelajaranKelas11');
 	Route::get('/internal/DaftarNilaiKelas12','mata_pelajaranController@IndexGetMataPelajaranKelas12');
 
 	Route::post('/internal/DaftarNilaiKelas10','mata_pelajaranController@storeMataPelajaran');
+	
+
+
 });
 
 Route::prefix('password')->group(function(){

@@ -94,10 +94,10 @@ class mata_pelajaranController extends Controller
 		}
 
 		$raport_header = DB::table('rapor_headers as rh')
-						->select('*')
-						->where('rapor_id', '=', $raport->id)
-						->get()
-						->first();
+		->select('*')
+		->where('rapor_id', '=', $raport->id)
+		->get()
+		->first();
 
 		if(!isset($raport_header)){
 			$raport_header = new Rapor_header();
@@ -105,6 +105,19 @@ class mata_pelajaranController extends Controller
 			$raport_header->tahun_ajaran = $this->getTahunAjaran();	
 
 			$raport_header->save();		
+		}
+
+		if(!isset($mata_pelajaran)){
+			$mata_pelajaran = new Mata_pelajaran();
+			$mata_pelajaran->raport_header_id = $raport_header->id;
+
+			$raport_header->nama_mata_pelajaran = $this->nama_mata_pelajaran();	
+
+			$raport_header->nilai_uts = $this->nilai_uts();
+			$raport_header->nilai_uas = $this->nilai_uas();
+			$raport_header->catatan = $this->catatan();
+
+			$mata_pelajaran->save();		
 		}
 
 		Session::put('raport_header_id', $raport_header->id);
@@ -116,6 +129,13 @@ class mata_pelajaranController extends Controller
 		Session::forget('raport_header_id');
 
 		return redirect('/pelajaran/internal/DaftarNilaiKelas10')->with('success','Nilai Siswa Telah Masuk');
+		
+	}
+
+	
+	public function IndexImportNilai()
+	{
+		return view('/internal/ImportNilai');
 	}
 
 	public function exportNilai10()
@@ -123,39 +143,51 @@ class mata_pelajaranController extends Controller
 		return Excel::download(new MataPelajaranExport,'Nilai10.xlsx');
 	}
 
+	// public function exportNilai11()
+	// {
+	// 	return Excel::download(new MataPelajaranExport,'Nilai11.xlsx');
+	// }
+
+	// public function exportNilai12()
+	// {
+	// 	return Excel::download(new MataPelajaranExport,'Nilai12.xlsx');
+	// }
 
 
-    public function editMataPelajaran($id)
-    {
-    	$mata_pelajaran = Mata_pelajaran::find($id);
-    	return view('',[''=>$mata_pelajaran]);
-    }
 
-    public function updateMataPelajaran($id,Request $request)
-    {
-    	$this->validate($request,[
-    		'rapor_header_id' =>'required',
-    		'nama_mata_pelajaran' =>'required',
-    		'nilai_uts' =>'required',
-    		'nilai_uas' =>'required',
-    		'catatan' =>'required'
-    	]);
-    	$mata_pelajaran = Mata_pelajaran::find($id);
-    	$mata_pelajaran = $request->rapor_header_id;
-    	$mata_pelajaran =$request ->nama_mata_pelajaran;
-    	$mata_pelajaran = $request->nilai_uts;
-    	$mata_pelajaran = $request->nilai_uas;
-    	$mata_pelajaran = $request->catatan;
-    	$mata_pelajaran->save();
-    	return redirect('');
 
-    }
 
-    public function deleteMataPelajaran($id)
-    {
-    	$mata_pelajaran = Mata_pelajaran::find($id);
-    	$mata_pelajaran->delete();
-    	return redirect('');
-    }
+	public function editMataPelajaran($id)
+	{
+		$mata_pelajaran = Mata_pelajaran::find($id);
+		return view('',[''=>$mata_pelajaran]);
+	}
+
+	public function updateMataPelajaran($id,Request $request)
+	{
+		$this->validate($request,[
+			'rapor_header_id' =>'required',
+			'nama_mata_pelajaran' =>'required',
+			'nilai_uts' =>'required',
+			'nilai_uas' =>'required',
+			'catatan' =>'required'
+		]);
+		$mata_pelajaran = Mata_pelajaran::find($id);
+		$mata_pelajaran = $request->rapor_header_id;
+		$mata_pelajaran =$request ->nama_mata_pelajaran;
+		$mata_pelajaran = $request->nilai_uts;
+		$mata_pelajaran = $request->nilai_uas;
+		$mata_pelajaran = $request->catatan;
+		$mata_pelajaran->save();
+		return redirect('');
+
+	}
+
+	public function deleteMataPelajaran($id)
+	{
+		$mata_pelajaran = Mata_pelajaran::find($id);
+		$mata_pelajaran->delete();
+		return redirect('');
+	}
 
 }

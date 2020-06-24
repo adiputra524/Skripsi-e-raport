@@ -178,14 +178,6 @@
     <!-- Main content -->
     <section class="content">
       <div class="card-body">
-          <form method="post" enctype="multipart/form-data" action="/pelajaran/internal/DaftarNilaiKelas10">
-            @csrf
-            Input Nilai <input type="file" name="select_file">
-            <td width="30%" align="Left">
-              <input type="submit" name="upload" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" class="btn btn-primary" value="Upload">
-
-            </div>
-          </form>
        <a href="/auth/internal/DaftarNilaiKelas12" class="btn btn-secondary">Export</a>
 
         <!-- Main row -->

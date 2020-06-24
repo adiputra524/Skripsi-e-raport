@@ -124,6 +124,11 @@
                   <p>Kelas 12</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="/pelajaran/internal/ImportNilai" class="nav-link">
+                  <p>Import Nilai</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item has-treeview">
