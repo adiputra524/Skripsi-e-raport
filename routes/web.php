@@ -123,6 +123,8 @@ Route::get('/internal/ImportNilai','mata_pelajaranController@IndexImportNilai');
 	Route::get('/internal/DaftarNilaiKelas12','mata_pelajaranController@IndexGetMataPelajaranKelas12');
 
 	Route::post('/internal/DaftarNilaiKelas10','mata_pelajaranController@storeMataPelajaran');
+	Route::post('/internal/DaftarNilaiKelas11','mata_pelajaranController@storeMataPelajaran');
+	Route::post('/internal/DaftarNilaiKelas12','mata_pelajaranController@storeMataPelajaran');
 	
 
 

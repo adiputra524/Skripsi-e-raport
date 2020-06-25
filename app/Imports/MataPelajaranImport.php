@@ -26,11 +26,41 @@ class MataPelajaranImport implements ToModel
         ->get()
         ->first();
 
-        $mata_pelajaran = DB::table('mata_pelajarans')
-        ->select('*')
-        ->where('nama_mata_pelajaran','=',trim($row[2]))
-        ->get()
-        ->first();
+        // $nama_mata_pelajaran = DB::table('mata_pelajarans')
+        // ->select('*')
+        // ->where('nama_mata_pelajaran','=',trim($row[2]))
+        // ->get()
+        // ->first();
+
+        if(!isset($mata_pelajaran->id))
+        {
+          return;
+        }
+
+        // $mata_pelajaran = DB::table('mata_pelajarans')
+        // ->select('*')
+        // ->where('rapor_header_id','!=','7')
+        // ->get()
+        // ->first();
+
+       
+
+
+        // $mata_pelajaran = DB::table('mata_pelajarans')
+        // ->select('*')
+        // ->where('rapor_header_id','!=','8')
+        // ->get()
+        // ->first();
+
+        
+
+        // $mata_pelajaran = DB::table('mata_pelajarans')
+        // ->select('*')
+        // ->where('rapor_header_id','!=','9')
+        // ->get()
+        // ->first();
+
+        
 
 
         if($mata_pelajaran ==null){

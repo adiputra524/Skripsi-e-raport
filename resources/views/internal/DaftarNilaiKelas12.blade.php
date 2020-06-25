@@ -121,6 +121,11 @@
                   <p>Kelas 12</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="/pelajaran/internal/ImportNilai" class="nav-link">
+                  <p>Import Nilai</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item has-treeview">
@@ -180,32 +185,40 @@
       <div class="card-body">
        <a href="/auth/internal/DaftarNilaiKelas12" class="btn btn-secondary">Export</a>
 
-        <!-- Main row -->
-        <div class="row">
-        	<div class="card-body table-responsive-sm">
-            <table class="table table-bordered table-hover table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th>Mata Pelajaran</th>
-                  <th scope="col">UTS</th>
-                  <th scope="col">UAS</th>
-                  <th>Catatan</th>
-                </tr>
-              </thead>
-              <tbody id="myTable">
+       <!-- Main row -->
+       <div class="row">
+         <div class="card-body table-responsive-sm">
+          <table class="table table-bordered table-hover table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Mata Pelajaran</th>
+                <th>UTS</th>
+                <th>UAS</th>
+                <th>Catatan</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($mata_pelajaran as $row)
+              <tr>
+                <td>{{$row->id}}</td>
+                <td>{{$row->nama_mata_pelajaran}}</td>
+                <td>{{$row->nilai_uts}}</td>
+                <td>{{$row->nilai_uas}}</td>
+                <td>{{$row->catatan}}</td>
+              </tr>
+              @endforeach
 
+            </tbody>
+          </table>
 
-              </tbody>
-            </table>
-
-          </div>
         </div>
-        <!-- /.row (main row) -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
+      </div>
+      <!-- /.row (main row) -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
 </div>
 @else
 <div class="wrapper">
@@ -281,6 +294,11 @@
                   <p>Kelas 12</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="/pelajaran/internal/ImportNilai" class="nav-link">
+                  <p>Import Nilai</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item">
@@ -316,7 +334,7 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-      <div class="card-body">
+        <div class="card-body">
           <form method="post" enctype="multipart/form-data" action="/pelajaran/internal/DaftarNilaiKelas12">
             @csrf
             Input Nilai <input type="file" name="select_file">
@@ -325,35 +343,43 @@
 
             </div>
           </form>
-       <a href="/auth/internal/DaftarNilaiKelas12" class="btn btn-secondary">Export</a>
+          <a href="/auth/internal/DaftarNilaiKelas12" class="btn btn-secondary">Export</a>
 
-        <!-- Main row -->
-        <div class="row">
-          <div class="card-body table-responsive-sm">
-            <table class="table table-bordered table-hover table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th>Mata Pelajaran</th>
-                  <th scope="col">UTS</th>
-                  <th scope="col">UAS</th>
-                  <th>Catatan</th>
-                </tr>
-              </thead>
-              <tbody>
+          <!-- Main row -->
+          <div class="row">
+            <div class="card-body table-responsive-sm">
+              <table class="table table-bordered table-hover table-striped">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Mata Pelajaran</th>
+                    <th>UTS</th>
+                    <th>UAS</th>
+                    <th>Catatan</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach($mata_pelajaran as $row)
+                  <tr>
+                    <td>{{$row->id}}</td>
+                    <td>{{$row->nama_mata_pelajaran}}</td>
+                    <td>{{$row->nilai_uts}}</td>
+                    <td>{{$row->nilai_uas}}</td>
+                    <td>{{$row->catatan}}</td>
+                  </tr>
+                  @endforeach
 
+                </tbody>
+              </table>
 
-              </tbody>
-            </table>
-
+            </div>
           </div>
-        </div>
-        <!-- /.row (main row) -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+          <!-- /.row (main row) -->
+        </div><!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+    </div>
   </div>
-</div>
-@endif
+  @endif
 </body>
 </html>

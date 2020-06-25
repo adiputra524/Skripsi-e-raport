@@ -17,8 +17,8 @@ class CreateMataPelajaransTable extends Migration
             $table->id();
             $table->foreignId('rapor_header_id');
             $table->string('nama_mata_pelajaran',50);
-            $table->float('nilai_uts',0,4);
-            $table->float('nilai_uas',0,4);
+            $table->float('nilai_uts',0,100);
+            $table->float('nilai_uas',0,100);
             $table->string('catatan');
 
             $table->foreign('rapor_header_id')->references('id')->on('rapor_headers');

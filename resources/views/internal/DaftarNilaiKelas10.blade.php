@@ -120,6 +120,11 @@
                   <p>Kelas 12</p>
                 </a>
               </li>
+               <li class="nav-item">
+                <a href="/pelajaran/internal/ImportNilai" class="nav-link">
+                  <p>Import Nilai</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item has-treeview">
@@ -176,15 +181,6 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <div class="card-body">
-          <form method="post" enctype="multipart/form-data" action="/pelajaran/internal/DaftarNilaiKelas10">
-            @csrf
-            Input Nilai <input type="file" name="select_file">
-            <td width="30%" align="Left">
-              <input type="submit" name="upload" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" class="btn btn-primary" value="Upload">
-            </form>
-          </div>
-          
           <a href="/auth/internal/DaftarNilaiKelas10" class="btn btn-secondary">Export</a>
           <!-- Main row -->
           <div class="row">
@@ -295,6 +291,11 @@
               <li class="nav-item">
                 <a href="/student/internal/DaftarSiswaKelas12" class="nav-link">
                   <p>Kelas 12</p>
+                </a>
+              </li>
+               <li class="nav-item">
+                <a href="/pelajaran/internal/ImportNilai" class="nav-link">
+                  <p>Import Nilai</p>
                 </a>
               </li>
             </ul>

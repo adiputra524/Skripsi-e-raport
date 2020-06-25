@@ -41,8 +41,8 @@ class mata_pelajaranController extends Controller
 		$mata_pelajaran = DB::table('rapor_headers as rh')
 		->select('*')
 		->join('mata_pelajarans','rapor_header_id','=','rh.id')
+		->where('rh.id','!=','2')
 		->get();
-
 		return view('/internal/DaftarNilaiKelas10',compact('mata_pelajaran'));
 
 	}
@@ -53,6 +53,7 @@ class mata_pelajaranController extends Controller
 		$mata_pelajaran = DB::table('rapor_headers as rh')
 		->select('*')
 		->join('mata_pelajarans','rapor_header_id','=','rh.id')
+		->where('rh.id','!=','1')
 		->get();
 
 		return view('/internal/DaftarNilaiKelas11',compact('mata_pelajaran'));
@@ -65,6 +66,7 @@ class mata_pelajaranController extends Controller
 		$mata_pelajaran = DB::table('rapor_headers as rh')
 		->select('*')
 		->join('mata_pelajarans','rapor_header_id','=','rh.id')
+
 		->get();
 
 		return view('/internal/DaftarNilaiKelas12',compact('mata_pelajaran'));
@@ -74,6 +76,7 @@ class mata_pelajaranController extends Controller
 	public function storeMataPelajaran(Request $request)
 	{
 		$raport = null;
+		
 
 		if($request->hasFile('select_file')){
 			$raport = DB::table('raports as mp')
@@ -107,18 +110,34 @@ class mata_pelajaranController extends Controller
 			$raport_header->save();		
 		}
 
-		if(!isset($mata_pelajaran)){
-			$mata_pelajaran = new Mata_pelajaran();
-			$mata_pelajaran->raport_header_id = $raport_header->id;
+		// dd($raport_header);
 
-			$raport_header->nama_mata_pelajaran = $this->nama_mata_pelajaran();	
 
-			$raport_header->nilai_uts = $this->nilai_uts();
-			$raport_header->nilai_uas = $this->nilai_uas();
-			$raport_header->catatan = $this->catatan();
+        // if(!isset($mata_pelajaran)){
+        // 	$mata_pelajaran = new Mata_pelajaran();
+        // 	$mata_pelajaran->
 
-			$mata_pelajaran->save();		
-		}
+
+        // }
+		// $mata_pelajaran = DB::table('mata_pelajarans as mp')
+		// ->select('*')
+		// ->where('id','=',$mata_pelajaran->raport_header_id)
+		// // ->where('raport_header_id','!=','7')
+		// ->get()
+		// ->first();
+
+		// if(!isset($mata_pelajaran)){
+		// 	$mata_pelajaran = new Mata_pelajaran();
+		// 	$mata_pelajaran -> Session::get('raport_header_id');
+
+		// 	$mata_pelajaran->nama_mata_pelajaran = $this->nama_mata_pelajaran();	
+
+		// 	$mata_pelajaran->nilai_uts = $this->nilai_uts();
+		// 	$mata_pelajaran->nilai_uas = $this->nilai_uas();
+		// 	$mata_pelajaran->catatan = $this->catatan();
+
+		// 	$mata_pelajaran->save();		
+		// }
 
 		Session::put('raport_header_id', $raport_header->id);
 
@@ -128,7 +147,7 @@ class mata_pelajaranController extends Controller
 
 		Session::forget('raport_header_id');
 
-		return redirect('/pelajaran/internal/DaftarNilaiKelas10')->with('success','Nilai Siswa Telah Masuk');
+		return redirect('/pelajaran/internal/ImportNilai')->with('success','Nilai Siswa Telah Masuk');
 		
 	}
 
@@ -143,15 +162,15 @@ class mata_pelajaranController extends Controller
 		return Excel::download(new MataPelajaranExport,'Nilai10.xlsx');
 	}
 
-	// public function exportNilai11()
-	// {
-	// 	return Excel::download(new MataPelajaranExport,'Nilai11.xlsx');
-	// }
+	public function exportNilai11()
+	{
+		return Excel::download(new MataPelajaranExport,'Nilai11.xlsx');
+	}
 
-	// public function exportNilai12()
-	// {
-	// 	return Excel::download(new MataPelajaranExport,'Nilai12.xlsx');
-	// }
+	public function exportNilai12()
+	{
+		return Excel::download(new MataPelajaranExport,'Nilai12.xlsx');
+	}
 
 
 

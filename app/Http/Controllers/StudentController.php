@@ -185,7 +185,7 @@ public function storeSiswa(Request $request)
 
 public function editSiswa($id)
 {
-  $students = TblStudent::find($id);
+  $students = TblStudent::find($nis);
 
   return view('/internal/EditDataSiswa',compact('students'));
 }
@@ -217,9 +217,9 @@ public function updateSiswa(Request $request, $id)
 
 }
 
-public function deleteSiswa($id)
+public function deleteSiswa($nis)
 {
-  $tbl_students = TblStudent::find($id);
+  $tbl_students = TblStudent::find($nis);
   $tbl_students->delete();
   return redirect('/student/internal/inputSiswa');
 }

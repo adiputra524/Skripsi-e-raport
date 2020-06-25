@@ -122,6 +122,11 @@
                   <p>Kelas 12</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="/pelajaran/internal/ImportNilai" class="nav-link">
+                  <p>Import Nilai</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item has-treeview">
@@ -187,15 +192,23 @@
             <table class="table table-bordered table-hover table-striped">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
+                  <th>#</th>
                   <th>Mata Pelajaran</th>
-                  <th scope="col">UTS</th>
-                  <th scope="col">UAS</th>
+                  <th>UTS</th>
+                  <th>UAS</th>
                   <th>Catatan</th>
                 </tr>
               </thead>
               <tbody>
-
+                @foreach($mata_pelajaran as $row)
+                <tr>
+                  <td>{{$row->id}}</td>
+                  <td>{{$row->nama_mata_pelajaran}}</td>
+                  <td>{{$row->nilai_uts}}</td>
+                  <td>{{$row->nilai_uas}}</td>
+                  <td>{{$row->catatan}}</td>
+                </tr>
+                @endforeach
 
               </tbody>
             </table>
@@ -217,11 +230,6 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="ion-android-menu"></i></a>
       </li>
-
-      <!-- Notifications Dropdown Menu -->
-
-
-      
     </ul>  
   </nav>
   <!-- Main Sidebar Container -->
@@ -283,6 +291,11 @@
                   <p>Kelas 12</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="/pelajaran/internal/ImportNilai" class="nav-link">
+                  <p>Import Nilai</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item">
@@ -318,7 +331,7 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-         <div class="card-body">
+       <div class="card-body">
         <a href="/auth/internal/DaftarNilaiKelas11" class="btn btn-secondary">Export</a>
         <!-- Main row -->
         <div class="row">
@@ -326,15 +339,23 @@
             <table class="table table-bordered table-hover table-striped">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
+                  <th>#</th>
                   <th>Mata Pelajaran</th>
-                  <th scope="col">UTS</th>
-                  <th scope="col">UAS</th>
+                  <th>UTS</th>
+                  <th>UAS</th>
                   <th>Catatan</th>
                 </tr>
               </thead>
               <tbody>
-
+                @foreach($mata_pelajaran as $row)
+                <tr>
+                  <td>{{$row->id}}</td>
+                  <td>{{$row->nama_mata_pelajaran}}</td>
+                  <td>{{$row->nilai_uts}}</td>
+                  <td>{{$row->nilai_uas}}</td>
+                  <td>{{$row->catatan}}</td>
+                </tr>
+                 @endforeach
 
               </tbody>
             </table>
