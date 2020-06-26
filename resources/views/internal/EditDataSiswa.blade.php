@@ -69,9 +69,9 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="#" class="brand-link">
-        <img src="{{asset('/image/kanaan school logo.png')}}" alt="kanaan-school" class="brand-image img-circle"
-        style="opacity: .8">
-        <span class="brand-text font-weight-light">Kanaan School</span>
+        <img src="{{asset('/image/logo-strada-edit.jpg')}}" alt="sma-strada" class="brand-image img-square"
+           style="opacity: .8;width:auto;height:20px;margin-top:5px">
+        <span class="brand-text font-weight-light">SMA Strada</span>
       </a>
 
       <!-- Sidebar -->
@@ -178,9 +178,9 @@
     </div>
 
     <form method="post" action="/student/update/{{$students->id}}">
+      @method('put')
       {{csrf_field()}}
-      {{method_field('PUT')}}
-
+    
 
       <!-- /.content-header -->
 

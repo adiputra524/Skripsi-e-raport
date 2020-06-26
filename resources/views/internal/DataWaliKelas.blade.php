@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>
-    Edit Data Walikelas
+  Data WaliKelas
   </title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -44,10 +44,8 @@
   <!-- JSON -->
   <script type="text/javascript" src="{{asset('js/ajax-load.js')}}"></script>
 
-
-
-
 </head>
+
 <body class="hold-transition sidebar-mini layout-fixed">
 
   <div class="wrapper">
@@ -60,39 +58,39 @@
         </li>
 
         <!-- Notifications Dropdown Menu -->
+        
 
 
-
-      </ul>  
-    </nav>
-    <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <!-- Brand Logo -->
-      <a href="#" class="brand-link">
-        <img src="{{asset('/image/logo-strada-edit.jpg')}}" alt="sma-strada" class="brand-image img-square"
+        </ul>  
+      </nav>
+      <!-- Main Sidebar Container -->
+      <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="#" class="brand-link">
+          <img src="{{asset('/image/logo-strada-edit.jpg')}}" alt="sma-strada" class="brand-image img-square"
            style="opacity: .8;width:auto;height:20px;margin-top:5px">
-        <span class="brand-text font-weight-light">SMA Strada</span>
-    </a>
+          <span class="brand-text font-weight-light">SMA Strada</span>
+        </a>
 
-      <!-- Sidebar -->
-      <div class="sidebar">
-        <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <div class="image">
-            <img src="{{asset('/image/sasuke.jpg')}}" class="img-circle elevation-2" alt="User Image">
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <!-- Sidebar user panel (optional) -->
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <img src="{{asset('/image/sasuke.jpg')}}" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+              <a href="#" class="d-block">{{Session::get('tbl_students')->nama }}</a>
+            </div>
           </div>
-          <div class="info">
-            <a href="#" class="d-block">{{Session::get('school_internals')->name }}</a>
-          </div>
-        </div>
 
-        <!-- Sidebar Menu -->
-        <nav class="mt-2">
-          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
            with font-awesome or any other icon font library -->
            <li class="nav-item">
-            <a href="/internal/internal-dashboard" class="nav-link">
+            <a href="/student/student-view" class="nav-link">
               <i class="nav-icon ion-android-home"></i>
               <p>
                 Home
@@ -109,12 +107,12 @@
             </a>
             <ul class="nav nav-treeview">
 
-              <li class="nav-item">
+             <li class="nav-item">
                 <a href="/student/internal/DaftarSiswaKelas10" class="nav-link">
                   <p>Kelas 10</p>
                 </a>
               </li>
-              <li class="nav-item">
+             <li class="nav-item">
                 <a href="/student/internal/DaftarSiswaKelas11" class="nav-link">
                   <p>Kelas 11</p>
                 </a>
@@ -126,37 +124,30 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon ion-android-people"></i>
-              <p>
-                Manage
-                <i class="right ion-android-arrow-dropleft"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-
-              <li class="nav-item">
-                <a href="/auth/internal/inputGuru" class="nav-link">
-                  <p>Akun Guru</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/student/internal/inputSiswa" class="nav-link">
-                  <p>Akun Siswa</p>
-                </a>
-              </li>
-            </ul>
-          </li>
           <li class="nav-item">
-            <a href="/auth/logout" class="nav-link">
+              <a href="/student/siswa/DataWaliKelas" class="nav-link">
+                <i class="ion-android-people"></i>
+                <p>
+                  List Guru
+                </p>
+              </a>
+            </li> 
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon ion-android-lock"></i>
+                <p>
+                  Change Password
+                </p>
+              </a>
+            </li>
+         <li class="nav-item">
+            <a href="/student/StudentLogout" class="nav-link">
               <i class="nav-icon ion-log-out"></i>
               <p>
                 Log Out
               </p>
             </a>
           </li>
-          
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -171,56 +162,85 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Edit Data Walikelas</h1>
+            <h1 class="m-0 text-dark">Data Walikelas</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
+        @isset($success)
+        <div class="row">
+          <div class="col-12">
+            <div class="alert alert-success" role="alert">
+              <strong>
+                {{ $success }}
 
-    <form method="post" action="/auth/update/{{$walikelas->id}}">
-      @method('put')
-      {{csrf_field()}}
-      
+              </strong>
+            }
+          </div>
+        </div>
+      </div>
+      @endisset
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
 
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <!-- Main row -->
+      <div class="row">
+        <!-- Left col -->
+        <section class="col-lg-12">
+          <div class="col-lg-6">
 
-      <!-- /.content-header -->
+          </div>
 
-      <!-- Main content -->
-      <section class="content">
-        <div class="container-fluid">
+          <div class="card-header">
+           Data Guru
+         </div>
+         <form method="post" enctype="multipart/form-data" action="/auth/internal/inputGuru">
+          @csrf
 
-          <!-- Main row -->
-          <div class="row">
-            <input type="hidden" name="id" value="data[i].id">
-            <table class="table table-bordered table-hover table-striped">
-              <thead>
-                <tr>
-                  <th>Nama</th>
-                  <th>Email</th>
-                  <th>Nomer Telpon</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><input type="text" name="nama" value="{{$walikelas->name}}"></td>
-                  <td><input type="email" name="email" value="{{$walikelas->email}}"></td>
-                  <td><input type="text" name="nmr-telpon" value="{{$walikelas->phone}}"></td>
-                </tr>
-              </tbody>
-            </table>
-            <br>
-            <div class="form-group">
-              <input type="submit" class="btn btn-success" value="Simpan">
-            </div>
-            <div class="card-body">
-            </div>
+          <div class="card-body">
+
+            
           </div>
         </form>
-        <!-- /.row (main row) -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
+
+        <br/>
+        <br/>
+        <table class="table table-bordered table-hover table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nama</th>
+              <th>Nomer Telpon</th>
+
+            </tr>
+
+          </thead>
+          <tbody>
+
+            @foreach($school_internal as $row)
+            <tr>
+              <td>{{$row->id}}</td>
+              <td>{{$row->name}}</td>
+              <td>{{$row->phone}}</td>
+              <td>
+                </td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+
+        </div>
+      </section>
+      <!-- /.Left col -->
+
+    </div>
+    <!-- /.row (main row) -->
+  </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+</div>
 </div>
 
 </body>
