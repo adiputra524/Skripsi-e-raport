@@ -132,7 +132,7 @@
               <a href="/student/siswa/DataWaliKelas" class="nav-link">
                 <i class="nav-icon ion-android-people"></i>
                 <p>
-                  List Guru
+                  List Walikelas
                 </p>
               </a>
             </li> 

@@ -21,7 +21,7 @@ class CreateMataPelajaransTable extends Migration
             $table->float('nilai_uas',0,100);
             $table->string('catatan');
 
-            $table->foreign('rapor_header_id')->references('id')->on('rapor_headers');
+            $table->foreign('rapor_header_id')->references('id')->on('rapor_headers')->onDelete('cascade');
         });
     }
 

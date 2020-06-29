@@ -19,7 +19,8 @@ class CreateRaportsTable extends Migration
         $table->foreignId('student_id');
         $table->dateTime('created_at');
         $table->dateTime('updated_at');
-        $table->foreign('student_id')->references('id')->on('tbl_students');
+
+        $table->foreign('student_id')->references('id')->on('tbl_students')->onDelete('cascade');
 
         // $table->timestamps();
 

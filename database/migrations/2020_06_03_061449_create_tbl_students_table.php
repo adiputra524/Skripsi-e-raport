@@ -27,7 +27,7 @@ class CreateTblStudentsTable extends Migration
             $table->dateTime('updated_at');
             // $table->timestamps();
 
-            $table->foreign('class_id')->references('id')->on('kelas');
+            $table->foreign('class_id')->references('id')->on('kelas')->onDelete('cascade');
         });
     }
 

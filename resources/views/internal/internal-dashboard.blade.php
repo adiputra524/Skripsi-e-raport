@@ -63,9 +63,9 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="#" class="brand-link">
-        <img src="{{asset('/image/kanaan school logo.png')}}" alt="kanaan-school" class="brand-image img-circle"
-             style="opacity: .8">
-        <span class="brand-text font-weight-light">Kanaan School</span>
+        <img src="{{asset('/image/logo-strada-edit.jpg')}}" alt="sma-strada" class="brand-image img-square"
+        style="opacity: .8">
+        <span class="brand-text font-weight-light">Strada School</span>
       </a>
 
       <!-- Sidebar -->
@@ -102,22 +102,18 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
-              
+                @foreach(Session::get('class') as $data)
                 <li class="nav-item">
-                  <a href="/student/internal/DaftarSiswaKelas10" class="nav-link">
-                    <p>Kelas 10</p>
+                  <a href="/student/internal/DataSiswa/{{ $data->id }}" class="nav-link">
+                    <p>{{ $data->class_name }}</p>
                   </a>
                 </li>
+                @endforeach
                 <li class="nav-item">
-                  <a href="/student/internal/DaftarSiswaKelas11" class="nav-link">
-                    <p>Kelas 11</p>
+                  <a href="/pelajaran/internal/ImportNilai" class="nav-link">
+                    <p>Import Nilai</p>
                   </a>
-                </li>
-                <li class="nav-item">
-                  <a href="/student/internal/DaftarSiswaKelas12" class="nav-link">
-                    <p>Kelas 12</p>
-                  </a>
-                </li>
+              </li>
               </ul>
             </li>
             
@@ -194,9 +190,9 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-      <img src="{{asset('/image/kanaan school logo.png')}}" alt="kanaan-school" class="brand-image img-circle"
-           style="opacity: .8">
-      <span class="brand-text font-weight-light">Kanaan School</span>
+      <img src="{{asset('/image/logo-strada-edit.jpg')}}" alt="sma-strada" class="brand-image img-square"
+        style="opacity: .8">
+      <span class="brand-text font-weight-light">Strada School</span>
     </a>
 
     <!-- Sidebar -->
@@ -234,21 +230,13 @@
             </a>
             <ul class="nav nav-treeview">
             
-              <li class="nav-item">
-                <a href="/student/internal/DaftarSiswaKelas10" class="nav-link">
-                  <p>Kelas 10</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/student/internal/DaftarSiswaKelas11" class="nav-link">
-                  <p>Kelas 11</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/student/internal/DaftarSiswaKelas12" class="nav-link">
-                  <p>Kelas 12</p>
-                </a>
-              </li>
+                @foreach(Session::get('class') as $data)
+                <li class="nav-item">
+                  <a href="/student/internal/DataSiswa/{{ $data->id }}" class="nav-link">
+                    <p>{{ $data->class_name }}</p>
+                  </a>
+                </li>
+                @endforeach
                <li class="nav-item">
                 <a href="/pelajaran/internal/ImportNilai" class="nav-link">
                   <p>Import Nilai</p>

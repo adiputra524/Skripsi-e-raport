@@ -62,9 +62,9 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="#" class="brand-link">
-        <img src="{{asset('/image/kanaan school logo.png')}}" alt="kanaan-school" class="brand-image img-circle"
-             style="opacity: .8">
-        <span class="brand-text font-weight-light">Kanaan School</span>
+        <img src="{{asset('/image/logo-strada-edit.jpg')}}" alt="sma-strada" class="brand-image img-square"
+        style="opacity: .8">
+        <span class="brand-text font-weight-light">Strada School</span>
       </a>
 
       <!-- Sidebar -->
@@ -100,30 +100,21 @@
                   <i class="right ion-android-arrow-dropleft"></i>
                 </p>
               </a>
-              <ul class="nav nav-treeview">
-              
+              <ul class="nav nav-treeview"> 
+              @foreach(Session::get('class') as $data)
                 <li class="nav-item">
-                  <a href="/student/nilaiSiswa/NilaiSiswaKelas10" class="nav-link">
-                    <p>Kelas 10</p>
+                  <a href="/student/siswa/NilaiSiswa/{{ $data->id }}" class="nav-link">
+                    <p>{{ $data->class_name }}</p>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="/student/nilaiSiswa/NilaiSiswaKelas11" class="nav-link">
-                    <p>Kelas 11</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="/student/nilaiSiswa/NilaiSiswaKelas12" class="nav-link">
-                    <p>Kelas 12</p>
-                  </a>
-                </li>
+                @endforeach
               </ul>
             </li>
             <li class="nav-item">
               <a href="/student/siswa/DataWaliKelas" class="nav-link">
                 <i class="ion-android-people"></i>
                 <p>
-                  List Guru
+                  List Walikelas
                 </p>
               </a>
             </li> 

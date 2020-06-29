@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>
-    Siswa Kelas 11
+Data Siswa
   </title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -68,9 +68,9 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="#" class="brand-link">
-        <img src="{{asset('/image/kanaan school logo.png')}}" alt="kanaan-school" class="brand-image img-circle"
+       <img src="{{asset('/image/logo-strada-edit.jpg')}}" alt="sma-strada" class="brand-image img-square"
         style="opacity: .8">
-        <span class="brand-text font-weight-light">Kanaan School</span>
+        <span class="brand-text font-weight-light">Strada School</span>
       </a>
 
       <!-- Sidebar -->
@@ -108,22 +108,13 @@
               </a>
               <ul class="nav nav-treeview">
 
-
+                @foreach(Session::get('class') as $data)
                 <li class="nav-item">
-                  <a href="/student/internal/DaftarSiswaKelas10" class="nav-link">
-                    <p>Kelas 10</p>
+                  <a href="/student/internal/DataSiswa/{{ $data->id }}" class="nav-link">
+                    <p>{{ $data->class_name }}</p>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="/student/internal/DaftarSiswaKelas11" class="nav-link">
-                    <p>Kelas 11</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="/student/internal/DaftarSiswaKelas12" class="nav-link">
-                    <p>Kelas 12</p>
-                  </a>
-                </li>
+                @endforeach
                 <li class="nav-item">
                 <a href="/pelajaran/internal/ImportNilai" class="nav-link">
                   <p>Import Nilai</p>
@@ -177,7 +168,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0 text-dark">Daftar Siswa Kelas 11</h1>
+              <h1 class="m-0 text-dark">Daftar Siswa {{ $tbl_student[0]->class_name }}</h1>
             </div><!-- /.col -->
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -209,7 +200,7 @@
                     <td>{{$row->nama}}</td>
                     <td>{{$row->nis}}</td>
                     <td> 
-                      <a href="/pelajaran/internal/DaftarNilaiKelas11" class="btn btn-info">Detail Nilai</a>
+                      <a href="/pelajaran/internal/DaftarNilaiSiswa/{{ $row->id }}" class="btn btn-info">Detail Nilai</a>
                     </td>
                   </tr>
                   @endforeach
@@ -251,9 +242,9 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="#" class="brand-link">
-        <img src="{{asset('/image/kanaan school logo.png')}}" alt="kanaan-school" class="brand-image img-circle"
+        <img src="{{asset('/image/logo-strada-edit.jpg')}}" alt="sma-strada" class="brand-image img-square"
         style="opacity: .8">
-        <span class="brand-text font-weight-light">Kanaan School</span>
+        <span class="brand-text font-weight-light">Strada School</span>
       </a>
 
       <!-- Sidebar -->
@@ -291,22 +282,13 @@
               </a>
               <ul class="nav nav-treeview">
 
-
+                @foreach(Session::get('class') as $data)
                 <li class="nav-item">
-                  <a href="/student/internal/DaftarSiswaKelas10" class="nav-link">
-                    <p>Kelas 10</p>
+                  <a href="/student/internal/DataSiswa/{{ $data->id }}" class="nav-link">
+                    <p>{{ $data->class_name }}</p>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="/student/internal/DaftarSiswaKelas11" class="nav-link">
-                    <p>Kelas 11</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="/student/internal/DaftarSiswaKelas12" class="nav-link">
-                    <p>Kelas 12</p>
-                  </a>
-                </li>
+                @endforeach
                  <li class="nav-item">
                 <a href="/pelajaran/internal/ImportNilai" class="nav-link">
                   <p>Import Nilai</p>
@@ -339,7 +321,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0 text-dark">Daftar Siswa Kelas 11</h1>
+              <h1 class="m-0 text-dark">Daftar Siswa {{ $tbl_student[0]->class_name }}</h1>
             </div><!-- /.col -->
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -371,7 +353,7 @@
                     <td>{{$row->nama}}</td>
                     <td>{{$row->nis}}</td>
                     <td> 
-                     <a href="/pelajaran/internal/DaftarNilaiKelas11" class="btn btn-info">Detail Nilai</a>
+                     <a href="/pelajaran/internal/DaftarNilaiSiswa/{{ $row->id }}" class="btn btn-info">Detail Nilai</a> 
                     </td>
                   </tr>
                   @endforeach

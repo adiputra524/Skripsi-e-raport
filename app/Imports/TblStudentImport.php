@@ -36,7 +36,8 @@ class TblStudentImport implements ToModel
             $email = DB::table('tbl_students')
             ->select('*')
             ->where('email','=', trim($row[4]))
-            ->get();
+            ->get()
+            ->first();
 
             if(isset($email->id)){
                 return;

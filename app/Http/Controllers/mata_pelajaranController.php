@@ -7,6 +7,7 @@ use App\Mata_pelajaran;
 use DB;
 use App\Rapor_header;
 use App\Raport;
+use App\TblStudent;
 use App\Imports\MataPelajaranImport;
 use App\Exports\MataPelajaranExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -35,123 +36,139 @@ class mata_pelajaranController extends Controller
 	    return $tahunAjaran;
 	}
 
-	public function IndexGetMataPelajaranKelas10() 
-	{
-		$mata_pelajaran = Mata_pelajaran::all();
-		$mata_pelajaran = DB::table('rapor_headers as rh')
-		->select('*')
-		->join('mata_pelajarans','rapor_header_id','=','rh.id')
-		->where('rh.id','!=','2')
-		->get();
-		return view('/internal/DaftarNilaiKelas10',compact('mata_pelajaran'));
+	private function parseTahunAjaran($string){
+		$tahun = $string;
 
+		for($i =0; $i< strlen($tahun); $i++){
+			if($tahun[$i] == '-'){
+				$tahun[$i] = '/';
+			}
+		}	
+
+		return $tahun;
 	}
 
-	public function IndexGetMataPelajaranKelas11() 
-	{
-		$mata_pelajaran = Mata_pelajaran::all();
-		$mata_pelajaran = DB::table('rapor_headers as rh')
-		->select('*')
-		->join('mata_pelajarans','rapor_header_id','=','rh.id')
-		->where('rh.id','!=','1')
-		->get();
+	private function createSemester(){
+		$currentDate = new \DateTime("now");
 
-		return view('/internal/DaftarNilaiKelas11',compact('mata_pelajaran'));
-
+		if($currentDate->format('m') > 7)
+			return 1;
+		
+		return 2;
 	}
 
-	public function IndexGetMataPelajaranKelas12() 
+	public function IndexMataPelajaran($id) 
 	{
-		$mata_pelajaran = Mata_pelajaran::all();
-		$mata_pelajaran = DB::table('rapor_headers as rh')
+		$raport = DB::table('raports as r')
 		->select('*')
-		->join('mata_pelajarans','rapor_header_id','=','rh.id')
-
+		->join('rapor_headers as rh', 'rh.rapor_id', '=', 'r.id')
+		->join('mata_pelajarans as mp','mp.rapor_header_id','=','rh.id')
+		->where('student_id','=', $id)
 		->get();
+		// dd($raport);
 
-		return view('/internal/DaftarNilaiKelas12',compact('mata_pelajaran'));
-
+		return view('/internal/DaftarNilaiSiswa',compact('raport'));
 	}
 
 	public function storeMataPelajaran(Request $request)
 	{
-		$raport = null;
-		
+		if(!$request->hasFile('select_file')){
+			return redirect()->back(); //Kalo gaada filenya, balikin ke page tadi
+		}
 
-		if($request->hasFile('select_file')){
-			$raport = DB::table('raports as mp')
+		#Parsing Name Filenya untuk get Student ID, Kelas, Semester, sama Tahun Ajaran
+		$filename = pathinfo($request->file('select_file')->getClientOriginalName(),  PATHINFO_FILENAME);
+		$flagMinPertama = -1;
+		$flagMinKedua  = -1;
+		$flagMinKetiga = -1;
+
+		for($i = 0; $i< strlen($filename); $i++)
+		{
+			if($filename[$i] =='-'){
+				if($flagMinPertama == -1){
+				
+					$flagMinPertama = $i;
+				}else if($flagMinKedua == -1){
+					
+					$flagMinKedua = $i;
+				}else if($flagMinKetiga == -1){
+					
+					$flagMinKetiga = $i;
+				}
+			}
+		}
+
+		// die();
+
+		$studentId = substr($filename, 0, $flagMinPertama);
+		$classId = substr($filename, $flagMinPertama+1, ($flagMinKedua - $flagMinPertama)-1);
+		$ganjilGenap = substr($filename, $flagMinKedua+1, ($flagMinKetiga - $flagMinKedua)-1);
+		$tahunAjaran = substr($filename, $flagMinKetiga+1, (strlen($filename) - $flagMinKetiga)-1);
+
+			
+			if($flagMinPertama = -1) redirect('/pelajaran/internal/ImportNilai')->with('fail','Data tidak sesuai');
+			
+			if($flagMinKedua == -1) redirect('/pelajaran/internal/ImportNilai')->with('fail','Data tidak Sesuai');
+			
+			if($flagMinKetiga == -1) redirect('/pelajaran/internal/ImportNilai')->with('fail','Data tidak Sesuai');
+			 
+		$studentId = Raport::find($student_id);
+		
+		
+		$ClassId = TblStudent::find($class_id);
+		
+		#Check Raportnya ada atau nggak
+		$raport = DB::table('raports')
 			->select('*')
-			->where('student_id','=', pathinfo($request->file('select_file')->getClientOriginalName(), PATHINFO_FILENAME))
+			->where('student_id','=', $studentId)
 			->get()
 			->first();
-		}else{
-			return redirect()->back();
-		}
+
 
 		if(!isset($raport)){
 			$raport = new Raport();
-			$raport->student_id = pathinfo($request->file('select_file')->getClientOriginalName(), PATHINFO_FILENAME);
+			$raport->student_id = $studentId;
 			$raport->created_at = new \DateTime('now');
-
 			$raport->save();
 		}
 
-		$raport_header = DB::table('rapor_headers as rh')
-		->select('*')
-		->where('rapor_id', '=', $raport->id)
-		->get()
-		->first();
+		//Check Raport Header berdasarkan Tahun Ajaran dan semester
+			$raport_header = DB::table('rapor_headers as rh')
+			->select('*')
+			->where('rh.rapor_id', '=', $raport->id)
+			->where('rh.tahun_ajaran', '=', $this->parseTahunAjaran($tahunAjaran))
+			->where('rh.semester','=',$ganjilGenap)
+			->orderBy('rh.tahun_ajaran', 'asc')
+			->get()
+			->first();
 
-		if(!isset($raport_header)){
-			$raport_header = new Rapor_header();
-			$raport_header->rapor_id = $raport->id;
-			$raport_header->tahun_ajaran = $this->getTahunAjaran();	
+			if(!isset($raport_header)){
+				$raport_header = new Rapor_header();
+				$raport_header->rapor_id = $raport->id;
+				$raport_header->tahun_ajaran = $this->parseTahunAjaran($tahunAjaran);	
+				$raport_header->semester = ($ganjilGenap);
+                
+				$raport_header->save();		
+			}
 
-			$raport_header->save();		
-		}
-
-		// dd($raport_header);
-
-
-        // if(!isset($mata_pelajaran)){
-        // 	$mata_pelajaran = new Mata_pelajaran();
-        // 	$mata_pelajaran->
-
-
-        // }
-		// $mata_pelajaran = DB::table('mata_pelajarans as mp')
-		// ->select('*')
-		// ->where('id','=',$mata_pelajaran->raport_header_id)
-		// // ->where('raport_header_id','!=','7')
-		// ->get()
-		// ->first();
-
-		// if(!isset($mata_pelajaran)){
-		// 	$mata_pelajaran = new Mata_pelajaran();
-		// 	$mata_pelajaran -> Session::get('raport_header_id');
-
-		// 	$mata_pelajaran->nama_mata_pelajaran = $this->nama_mata_pelajaran();	
-
-		// 	$mata_pelajaran->nilai_uts = $this->nilai_uts();
-		// 	$mata_pelajaran->nilai_uas = $this->nilai_uas();
-		// 	$mata_pelajaran->catatan = $this->catatan();
-
-		// 	$mata_pelajaran->save();		
-		// }
-
-		Session::put('raport_header_id', $raport_header->id);
-
-		$mata_pelajaran = new MataPelajaranImport();
-
-		$data = Excel::import($mata_pelajaran,$request->file('select_file'));
-
-		Session::forget('raport_header_id');
-
-		return redirect('/pelajaran/internal/ImportNilai')->with('success','Nilai Siswa Telah Masuk');
 		
+
+
+			Session::put('raport_header_id', $raport_header->id);
+			// Session::put('rapor_header_id',$raport->id);
+
+			$mata_pelajaran = new MataPelajaranImport();
+
+			$data = Excel::import($mata_pelajaran,$request->file('select_file'));
+
+			Session::forget('raport_header_id');
+			// Session::forget('rapor_header_id');
+
+			return redirect('/pelajaran/internal/ImportNilai')->with('success','Nilai Siswa Telah Masuk');
+
 	}
 
-	
+
 	public function IndexImportNilai()
 	{
 		return view('/internal/ImportNilai');
@@ -171,10 +188,6 @@ class mata_pelajaranController extends Controller
 	{
 		return Excel::download(new MataPelajaranExport,'Nilai12.xlsx');
 	}
-
-
-
-
 
 	public function editMataPelajaran($id)
 	{

@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Hash;
 use DB;
 use App\Imports\SchoolInternalImport;
 use Maatwebsite\Excel\Facades\Excel;
+
+use App\Kelas;
 class SchoolInternalController extends Controller
 {
 	public function IndexLogin(){
@@ -51,6 +53,7 @@ class SchoolInternalController extends Controller
 		}
 
 		Session::put('school_internals',$data);
+		Session::put('class', Kelas::all());
 		return redirect('internal/internal-dashboard');
 	}
 

@@ -54,6 +54,7 @@ class StudentController extends Controller
 
 
  Session::put('tbl_students',$data);
+ Session::put('class', Kelas::all());
  return redirect('/student/student-view');
 
 }
@@ -76,43 +77,16 @@ public function IndexGetSiswa()
 }
 
 
-public function DataSiswaKelas10()
+public function DataSiswa($kelas)
 {
   $tbl_student = TblStudent::all();
   $tbl_student=DB::table('kelas AS k')
   ->select('*')
   ->join('tbl_students','class_id','=','k.id')
-  ->where('class_id','!=','3') 
-  ->where('class_id','!=','4') 
+  ->where('class_id','=', $kelas) 
   ->get();
 
-  return view('/internal/DaftarSiswaKelas10',compact('tbl_student'));
-}
-
-public function DataSiswaKelas11()
-{
-  $tbl_student = TblStudent::all();
-  $tbl_student=DB::table('kelas AS k')
-  ->select('*')
-  ->join('tbl_students','class_id','=','k.id')
-  ->where('class_id','!=','1') 
-  ->where('class_id','!=','4') 
-  ->get();
-
-  return view('/internal/DaftarSiswaKelas11',compact('tbl_student'));
-}
-
-public function DataSiswaKelas12()
-{
-  $tbl_student = TblStudent::all();
-  $tbl_student=DB::table('kelas AS k')
-  ->select('*')
-  ->join('tbl_students','class_id','=','k.id')
-  ->where('class_id','!=','1') 
-  ->where('class_id','!=','3') 
-  ->get();
-
-  return view('/internal/DaftarSiswaKelas12',compact('tbl_student'));
+  return view('/internal/DaftarSiswaPerKelas',compact('tbl_student'));
 }
 
 public function getDataWalikelas(Request $request)
@@ -130,46 +104,21 @@ public function getDataWalikelas(Request $request)
   return view('/student/DataWaliKelas',compact('school_internal'));
 }
 
-public function getNilaiSiswaKelas10(Request $request)
+public function IndexNilaiSiswa($id)
 {
-  $mata_pelajaran = Mata_pelajaran::all();
-  $mata_pelajaran = DB::table('rapor_headers as rh')
-  ->select('*')
-  ->join('mata_pelajarans','rapor_header_id','=','rh.id')
-  ->get();
 
-  return view('/student/NilaiSiswaKelas10',compact('mata_pelajaran'));
+ $raport = DB::table('raports as r')
+    ->select('*')
+    ->join('rapor_headers as rh', 'rh.rapor_id', '=', 'r.id')
+    ->join('mata_pelajarans as mp','mp.rapor_header_id','=','rh.id')
+    ->where('student_id','=', $id)
+    ->get();
+    // dd($raport);
+
+    return view('/student/NilaiSiswa',compact('raport'));
 
 
 }
-
-public function getNilaiSiswaKelas11(Request $request)
-{
-  $mata_pelajaran = Mata_pelajaran::all();
-  $mata_pelajaran = DB::table('rapor_headers as rh')
-  ->select('*')
-  ->join('mata_pelajarans','rapor_header_id','=','rh.id')
-  ->get();
-
-  return view('/student/NilaiSiswaKelas11',compact('mata_pelajaran'));
-
-
-}
-
-public function getNilaiSiswaKelas12(Request $request)
-{
-  $mata_pelajaran = Mata_pelajaran::all();
-  $mata_pelajaran = DB::table('rapor_headers as rh')
-  ->select('*')
-  ->join('mata_pelajarans','rapor_header_id','=','rh.id')
-  ->get();
-
-  return view('/student/NilaiSiswaKelas12',compact('mata_pelajaran'));
-
-
-}
-
-
 
 
 public function storeSiswa(Request $request)
@@ -217,10 +166,11 @@ public function updateSiswa(Request $request, $id)
 
 }
 
-public function deleteSiswa($nis)
+public function deleteSiswa($id)
 {
-  $tbl_students = TblStudent::find($nis);
-  $tbl_students->delete();
+  TblStudent::where('id',$id)->delete();
+  // $tbl_students = TblStudent::find($id);
+  // $tbl_students->delete();
   return redirect('/student/internal/inputSiswa');
 }
 

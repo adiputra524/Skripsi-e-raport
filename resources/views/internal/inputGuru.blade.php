@@ -67,9 +67,9 @@
       <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="#" class="brand-link">
-          <img src="{{asset('/image/kanaan school logo.png')}}" alt="kanaan-school" class="brand-image img-circle"
-          style="opacity: .8">
-          <span class="brand-text font-weight-light">Kanaan School</span>
+         <img src="{{asset('/image/logo-strada-edit.jpg')}}" alt="sma-strada" class="brand-image img-square"
+        style="opacity: .8">
+          <span class="brand-text font-weight-light">Strada School</span>
         </a>
 
         <!-- Sidebar -->
@@ -107,21 +107,13 @@
             </a>
             <ul class="nav nav-treeview">
 
-             <li class="nav-item">
-                <a href="/student/internal/DaftarSiswaKelas10" class="nav-link">
-                  <p>Kelas 10</p>
-                </a>
-              </li>
-             <li class="nav-item">
-                <a href="/student/internal/DaftarSiswaKelas11" class="nav-link">
-                  <p>Kelas 11</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/student/internal/DaftarSiswaKelas12" class="nav-link">
-                  <p>Kelas 12</p>
-                </a>
-              </li>
+                 @foreach(Session::get('class') as $data)
+                <li class="nav-item">
+                  <a href="/student/internal/DataSiswa/{{ $data->id }}" class="nav-link">
+                    <p>{{ $data->class_name }}</p>
+                  </a>
+                </li>
+                @endforeach
               <li class="nav-item">
                 <a href="/pelajaran/internal/ImportNilai" class="nav-link">
                   <p>Import Nilai</p>
@@ -174,7 +166,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Daftar Guru</h1>
+            <h1 class="m-0 text-dark">Daftar Walikelas</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
         @isset($success)
@@ -206,7 +198,7 @@
           </div>
 
           <div class="card-header">
-           Data Guru
+           Data Walikelas
          </div>
          <form method="post" enctype="multipart/form-data" action="/auth/internal/inputGuru">
           @csrf
