@@ -6,6 +6,8 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('/css/login-v3.css')}}">
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript" src="{{asset('/js/login-v2.js')}}"></script>
+
+	
 </head>
 <body>
 	<div class="container">
@@ -41,5 +43,11 @@
 	</label>
 </div>
 </div>
+
+@if(Session::has('error'))
+    <script type="text/javascript">
+		alert("{{ Session::get('error') }}");
+    </script>
+@endif
 </body>
 </html>

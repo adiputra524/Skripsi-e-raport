@@ -25,11 +25,10 @@ class StudentController extends Controller
 
   public function LoginStudent(Request $request)
   {
-   $validate = Validator::make($request->all(),[
-    "email" =>'required',
-    "password" => 'required'
-
-  ]);
+    $validate = Validator::make($request->all(),[
+      "email" =>'required',
+      "password" => 'required'
+    ]);
 
    if($validate->fails()){
     $error = $validate->errors()->first();
@@ -134,7 +133,7 @@ public function storeSiswa(Request $request)
 
 public function editSiswa($id)
 {
-  $students = TblStudent::find($nis);
+  $students = TblStudent::find($id);
 
   return view('/internal/EditDataSiswa',compact('students'));
 }

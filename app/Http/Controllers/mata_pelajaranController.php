@@ -8,6 +8,7 @@ use DB;
 use App\Rapor_header;
 use App\Raport;
 use App\TblStudent;
+use App\Kelas;
 use App\Imports\MataPelajaranImport;
 use App\Exports\MataPelajaranExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -84,21 +85,16 @@ class mata_pelajaranController extends Controller
 
 		for($i = 0; $i< strlen($filename); $i++)
 		{
-			if($filename[$i] =='-'){
+			if($filename[$i] == '-'){
 				if($flagMinPertama == -1){
-				
 					$flagMinPertama = $i;
 				}else if($flagMinKedua == -1){
-					
 					$flagMinKedua = $i;
 				}else if($flagMinKetiga == -1){
-					
 					$flagMinKetiga = $i;
 				}
 			}
 		}
-
-		// die();
 
 		$studentId = substr($filename, 0, $flagMinPertama);
 		$classId = substr($filename, $flagMinPertama+1, ($flagMinKedua - $flagMinPertama)-1);
@@ -106,17 +102,37 @@ class mata_pelajaranController extends Controller
 		$tahunAjaran = substr($filename, $flagMinKetiga+1, (strlen($filename) - $flagMinKetiga)-1);
 
 			
-			if($flagMinPertama = -1) redirect('/pelajaran/internal/ImportNilai')->with('fail','Data tidak sesuai');
+			if($flagMinPertama == -1){
+				Session::flash('error', 'Nama file tidak sesuai!');
+				return redirect('/pelajaran/internal/ImportNilai');
+			} 
 			
-			if($flagMinKedua == -1) redirect('/pelajaran/internal/ImportNilai')->with('fail','Data tidak Sesuai');
-			
-			if($flagMinKetiga == -1) redirect('/pelajaran/internal/ImportNilai')->with('fail','Data tidak Sesuai');
-			 
-		$studentId = Raport::find($student_id);
+			if($flagMinKedua == -1) {
+				Session::flash('error', 'Nama file tidak sesuai!');
+				return redirect('/pelajaran/internal/ImportNilai');
+			} 
+
+			if($flagMinKetiga == -1) {
+				Session::flash('error', 'Nama file tidak sesuai!');
+				return redirect('/pelajaran/internal/ImportNilai');
+			}
+
+
+		$student_Id = TblStudent::find($studentId);
 		
-		
-		$ClassId = TblStudent::find($class_id);
-		
+		if($student_Id == null) {
+			Session::flash('error', 'Murid dengan id '.$studentId.' tidak ditemukan!');
+			return redirect('/pelajaran/internal/ImportNilai');
+		} 
+
+		$class= Kelas::find($student_Id->class_id);
+		// dd($class->grade);
+
+		if($class->grade < $classId) {
+			Session::flash('error', 'Data nilai yang anda masukan untuk '.$student_Id->nama.' tidak valid! Silahkan cek kembali kelas murid dan nama file yang anda upload!');
+			return redirect('/pelajaran/internal/ImportNilai');
+		} 
+
 		#Check Raportnya ada atau nggak
 		$raport = DB::table('raports')
 			->select('*')
@@ -164,7 +180,9 @@ class mata_pelajaranController extends Controller
 			Session::forget('raport_header_id');
 			// Session::forget('rapor_header_id');
 
-			return redirect('/pelajaran/internal/ImportNilai')->with('success','Nilai Siswa Telah Masuk');
+			Session::flash('success', 'Sukses memasukan nilai siswa!');
+
+			return redirect('/pelajaran/internal/ImportNilai');
 
 	}
 
@@ -176,7 +194,7 @@ class mata_pelajaranController extends Controller
 
 	public function exportNilai10()
 	{
-		return Excel::download(new MataPelajaranExport,'Nilai10.xlsx');
+		return Excel::download(new MataPelajaranExport,'NilaiUjian.xlsx');
 	}
 
 	public function exportNilai11()
