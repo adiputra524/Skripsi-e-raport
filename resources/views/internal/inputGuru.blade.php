@@ -1,5 +1,5 @@
 @extends('template.internal_master')
-@section('title', 'Kontol Berdebu')
+@section('title', 'Input Walikelas')
 @section('content')
     <!-- Content Header (Page header) -->
     <div class="content-header">

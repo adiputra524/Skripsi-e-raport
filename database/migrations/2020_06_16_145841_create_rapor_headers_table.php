@@ -19,6 +19,7 @@ class CreateRaporHeadersTable extends Migration
             $table->foreignId('rapor_id');
             $table->string('tahun_ajaran',30);
             $table->integer('semester');
+            $table->integer('grade');
             
             $table->foreign('rapor_id')->references('id')->on('raports')->onDelete('cascade');
         });

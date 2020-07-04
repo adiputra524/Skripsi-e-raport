@@ -15,7 +15,7 @@
 
     <section class="content">
       <div class="container-fluid">
-          <a href="/auth/internal/DaftarNilaiKelas10" class="btn btn-secondary">Export</a>
+          <a href="/auth/internal/DaftarNilaiKelas/{id}" class="btn btn-secondary">Export</a>
                     
           <div class="row">
             <div class="card-body table-responsive-sm">

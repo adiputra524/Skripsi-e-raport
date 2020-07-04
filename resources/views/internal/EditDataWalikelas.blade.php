@@ -11,17 +11,17 @@
       </div>
     </div>
 
-    <form method="POST" action="/auth/update/{{$walikelas->id}}">
+    <form method="POST"  action="/auth/update/{{$walikelas->id}}">
       @csrf
       {{method_field('PUT')}}
 
-
+      
       <section class="content">
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4 col-12">
-              <input type="hidden" name="id" value="data[i].id">
+            <input type="hidden" name="id" value="{{$walikelas->id}}"">
               <table class="table table-bordered table-hover table-striped">
                 <thead>
                   <tr>
@@ -32,9 +32,10 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><input type="text" name="nama" value="{{$walikelas->name}}"></td>
-                    <td><input type="email" name="email" value="{{$walikelas->email}}"></td>
-                    <td><input type="text" name="nmr-telpon" value="{{$walikelas->phone}}"></td>
+                    
+                    <td><input type="text" name="nama"  value="{{$walikelas->name}}"></td>
+                    <td><input type="email" name="email"  value="{{$walikelas->email}}"></td>
+                    <td><input type="text" name="nmr-telpon"  value="{{$walikelas->phone}}"></td>
                   </tr>
                 </tbody>
               </table>
@@ -46,4 +47,14 @@
             <div class="col-md-4"></div>
           </div>
         </form>
+
+        {{-- <script type="text/javascript">
+        $('#submit-button').click(function(e){
+          if($('#nama').val()== $('#emai').val().('#nmr-telepon').val())
+          {
+            $('#Update-Data-Walikelas').submit();
+          }
+
+        });
+        </script> --}}
 @endsection

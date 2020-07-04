@@ -114,7 +114,10 @@ class SchoolInternalController extends Controller
 		$walikelas->email = $request->email;
 		$walikelas->phone = $request->phone;
 
+
 		$walikelas->save();
+
+		dd($walikelas);
 
 		return redirect('/auth/internal/inputGuru')->with('data berhasil diubah');
 

@@ -39,15 +39,15 @@ Route::prefix('auth')->group(function(){
 
 	Route::get('/internal/EditDataWalikelas/edit/{id}','SchoolInternalController@editWalikelas');
 
-	Route::put('/update/{id}','SchoolInternalController@updateWalikelas');
+	Route::put('/internal/update/{id}','SchoolInternalController@updateWalikelas');
 
 	Route::get('internal/inputGuru/hapus/{id}','SchoolInternalController@deleteGuru');
 
-	Route::get('/internal/DaftarNilaiKelas10','mata_pelajaranController@exportNilai10');
+	Route::get('/internal/DaftarNilaiKelas/{id}','mata_pelajaranController@exportNilai');
 
-	Route::get('/internal/DaftarNilaiKelas11','mata_pelajaranController@exportNilai11');
+	// Route::get('/internal/DaftarNilaiKelas11','mata_pelajaranController@exportNilai11');
 
-	Route::get('/internal/DaftarNilaiKelas12','mata_pelajaranController@exportNilai12');
+	// Route::get('/internal/DaftarNilaiKelas12','mata_pelajaranController@exportNilai12');
 
 	
 
