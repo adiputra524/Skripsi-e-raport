@@ -15,10 +15,11 @@
 
     <section class="content">
       <div class="container-fluid">
-          <a href="/auth/internal/DaftarNilaiKelas/{id}" class="btn btn-secondary">Export</a>
+          <a href="/auth/internal/DaftarNilaiKelas/{rapor_header_id}" class="btn btn-secondary">Export</a>
                     
           <div class="row">
             <div class="card-body table-responsive-sm">
+               <h3 class="m-0 text-dark">Kelas 10 Semester 1</h3>
               <table class="table table-bordered table-hover table-striped">
                 <thead>
                   <tr>
@@ -58,6 +59,7 @@
 
           <div class="row">
             <div class="card-body table-responsive-sm">
+               <h3 class="m-0 text-dark">Kelas 10 Semester 2</h3>
               <table class="table table-bordered table-hover table-striped">
                 <thead>
                   <tr>
@@ -96,6 +98,7 @@
 
               <div class="row">
             <div class="card-body table-responsive-sm">
+               <h3 class="m-0 text-dark">Kelas 11 Semester 1</h3>
               <table class="table table-bordered table-hover table-striped">
                 <thead>
                   <tr>
@@ -134,6 +137,7 @@
 
               <div class="row">
             <div class="card-body table-responsive-sm">
+               <h3 class="m-0 text-dark">Kelas 11 Semester 2</h3>
               <table class="table table-bordered table-hover table-striped">
                 <thead>
                   <tr>
@@ -172,6 +176,7 @@
 
               <div class="row">
             <div class="card-body table-responsive-sm">
+               <h3 class="m-0 text-dark">Kelas 12 Semester 1</h3>
               <table class="table table-bordered table-hover table-striped">
                 <thead>
                   <tr>
@@ -210,6 +215,7 @@
 
               <div class="row">
             <div class="card-body table-responsive-sm">
+               <h3 class="m-0 text-dark">Kelas 12 Semester 2</h3>
               <table class="table table-bordered table-hover table-striped">
                 <thead>
                   <tr>

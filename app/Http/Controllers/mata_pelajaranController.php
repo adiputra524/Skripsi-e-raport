@@ -12,8 +12,10 @@ use App\Kelas;
 use App\Imports\MataPelajaranImport;
 use App\Exports\MataPelajaranExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Exporter;
 
 use Session;
+
 
 class mata_pelajaranController extends Controller
 {
@@ -62,40 +64,68 @@ class mata_pelajaranController extends Controller
 
 	public function IndexMataPelajaran($id)
 	{
+
+
+
+		$Grade = Kelas::find('grade');
+		$Semester = Rapor_header::find('semester');
+		$kelas = Kelas::find('class_name');
+
 		$student = DB::table('tbl_students as tb')
 			->select('*')
-			->join('raports as r','tb.id','=','r.student_id')
-			->join('rapor_headers as rh','rh.rapor_id','=','r.id')
-			->where('rh.id','=',$id)
-			->get();
-		
-			// dd($student);
+			->join('raports as r', 'tb.id', '=', 'r.student_id')
+			->join('rapor_headers as rh', 'rh.rapor_id', '=', 'r.id')
+			->where('tb.id', '=', $id)
+			->get()
+			->first();
+
+
+		$GradeStudent = DB::table('kelas as k')
+			->select('*')
+			->join('tbl_students as tb', 'tb.class_id', '=', 'k.id')
+			->join('raports as r', 'r.student_id', '=', 'tb.id')
+			->join('rapor_headers as rh', 'rh.rapor_id', '=', 'r.id')
+			->where('tb.id', '=', $id)
+			->where('rh.semester', '=', $id)
+			->get()
+			->first();
+
+
+
+
 
 		$rapot_bundle = [];
 
 
-		for($i = 10; $i <= $student->grade; $i++){
+		for ($i = 10; $i <= $student->grade; $i++) {
 			$data = DB::table('mata_pelajarans as m')
-					->join('rapor_headers as k', 'k.id', '=', 'm.rapor_header_id')
-					->join('raports as r', 'r.id', '=', 'k.rapor_id')
-					->where('r.student_id', '=', $id)
-					->get();
-
-			array_push($rapot_bundle, $data);
+				->join('rapor_headers as k', 'k.id', '=', 'm.rapor_header_id')
+				->join('raports as r', 'r.id', '=', 'k.rapor_id')
+				->where('r.student_id', '=', $id)
+				->get();
+				
+				
+			array_push($rapot_bundle, $data, $student);
 		}
 
-		// dd($rapot_bundle);
 
 
-		
+
+
+	
+
+
 
 		$raport = DB::table('raports as r')
 			->join('rapor_headers as t', 'r.id', '=', 't.rapor_id')
 			->join('mata_pelajarans as m', 'r.id', '=', 'm.rapor_header_id')
 			->where('r.student_id', '=', $id)
 			->get();
+			
 
-			dd($raport);
+		
+
+		
 
 		return view('/internal/DaftarNilaiSiswa', compact('raport'));
 	}
@@ -111,7 +141,7 @@ class mata_pelajaranController extends Controller
 		$flagMinPertama = -1;
 		$flagMinKedua  = -1;
 		$flagMinKetiga = -1;
-		
+
 		for ($i = 0; $i < strlen($filename); $i++) {
 			if ($filename[$i] == '-') {
 				if ($flagMinPertama == -1) {
@@ -128,7 +158,7 @@ class mata_pelajaranController extends Controller
 		$Grade = substr($filename, $flagMinPertama + 1, ($flagMinKedua - $flagMinPertama) - 1);
 		$ganjilGenap = substr($filename, $flagMinKedua + 1, ($flagMinKetiga - $flagMinKedua) - 1);
 		$tahunAjaran = substr($filename, $flagMinKetiga + 1, (strlen($filename) - $flagMinKetiga) - 1);
-	
+
 
 		if ($flagMinPertama == -1) {
 			Session::flash('error', 'Nama file tidak sesuai!');
@@ -148,18 +178,32 @@ class mata_pelajaranController extends Controller
 
 
 
-
 		$student_Id = TblStudent::find($studentId);
+	
+		// $current_Date = Rapor_header::find($student_Id->student_id);
+	   $current_Date = DB::table('rapor_headers as rh')
+	   ->select('*')
+	   ->join('raports as r','rh.rapor_id','=','r.id')
+	   ->join('tbl_students as tb','r.student_id','=','tb.id')
+	   ->where('tb.id','=',$student_Id->id)
+	   ->get()
+	   ->first();
+
+	   
+
+	   $KelasSemester = ($current_Date->semester);
+	 
 
 		if ($student_Id == null) {
 			Session::flash('error', 'Murid dengan id ' . $studentId . ' tidak ditemukan!');
 			return redirect('/pelajaran/internal/ImportNilai');
 		}
 
-		$class = Kelas::find($student_Id->class_id);
-		// dd($class->grade);
 
-		if ($class->grade < $Grade) {
+		$class = Kelas::find($student_Id->class_id);
+	    
+		
+		if ($class->grade  !=$Grade || $KelasSemester !=$ganjilGenap) {
 			Session::flash('error', 'Data nilai yang anda masukan untuk ' . $student_Id->nama . ' tidak valid! Silahkan cek kembali kelas murid dan nama file yang anda upload!');
 			return redirect('/pelajaran/internal/ImportNilai');
 		}
@@ -194,7 +238,7 @@ class mata_pelajaranController extends Controller
 			$raport_header->rapor_id = $raport->id;
 			$raport_header->tahun_ajaran = $this->parseTahunAjaran($tahunAjaran);
 			$raport_header->semester = ($ganjilGenap);
-            $raport_header->grade=($Grade);
+			$raport_header->grade = ($Grade);
 			$raport_header->save();
 		}
 
@@ -222,55 +266,22 @@ class mata_pelajaranController extends Controller
 		return view('/internal/ImportNilai');
 	}
 
-	public function exportNilai($id)
+
+
+	public function exportNilai($rapor_header_id)
 	{
-		$raport = DB::table('raports as r')
-			->select('*')
-			->join('rapor_headers as rh', 'rh.rapor_id', '=', 'r.id')
-			->join('mata_pelajarans as mp', 'mp.rapor_header_id', '=', 'rh.id')
 
-			->where('student_id', '=', $id)
-			->get();
+		$query = DB::table('mata_pelajarans as mp')
+			->join('rapor_headers as rh', 'mp.rapor_header_id', '=', 'rh.id')
+			->join('raports as r', 'rh.rapor_id', '=', 'r.id')
+			->join('tbl_students as tb', '.student_id', '=', 'tb.id')
+			->where('mp.rapor_header_id', '=', $rapor_header_id)
+			->get()
+			->first();
 
 
-		return Excel::download(new MataPelajaranExport, 'NilaiUjian.xlsx');
+		return Excel::download(new MataPelajaranExport($query), 'NilaiUjian.xlsx');
 	}
-
-	// public function exportNilai11()
-	// {
-	// 	return Excel::download(new MataPelajaranExport,'Nilai11.xlsx');
-	// }
-
-	// public function exportNilai12()
-	// {
-	// 	return Excel::download(new MataPelajaranExport,'Nilai12.xlsx');
-	// }
-
-	public function editMataPelajaran($id)
-	{
-		$mata_pelajaran = Mata_pelajaran::find($id);
-		return view('', ['' => $mata_pelajaran]);
-	}
-
-	public function updateMataPelajaran($id, Request $request)
-	{
-		$this->validate($request, [
-			'rapor_header_id' => 'required',
-			'nama_mata_pelajaran' => 'required',
-			'nilai_uts' => 'required',
-			'nilai_uas' => 'required',
-			'catatan' => 'required'
-		]);
-		$mata_pelajaran = Mata_pelajaran::find($id);
-		$mata_pelajaran = $request->rapor_header_id;
-		$mata_pelajaran = $request->nama_mata_pelajaran;
-		$mata_pelajaran = $request->nilai_uts;
-		$mata_pelajaran = $request->nilai_uas;
-		$mata_pelajaran = $request->catatan;
-		$mata_pelajaran->save();
-		return redirect('');
-	}
-
 	public function deleteMataPelajaran($id)
 	{
 		$mata_pelajaran = Mata_pelajaran::find($id);

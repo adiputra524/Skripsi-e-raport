@@ -24,13 +24,7 @@
 					<input type="password" name="password" minlength="6"  size="50" id="password-field" class="login-form-field" placeholder="Password">
 				</div>
 
-				<label id="remember-box">
-			<!-- <input type="checkbox" checked="checked" name="remember-me" id="remember-box"> Remember me
-			-->
-			<input type="checkbox" name="remember-me" id="box">
-			Remember me
-		</label>
-
+		
 		<button type="submit" id="login-button">
 			Login
 		</button>

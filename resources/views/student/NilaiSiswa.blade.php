@@ -15,6 +15,7 @@
     <section class="content">
       <div class="container-fluid">
             <div class="card-body table-responsive-sm">
+              <h3 class="m-0 text-dark">Kelas 10 Semester 1</h3> 
               <table class="table table-bordered table-hover table-striped">
                 <thead>
                   <tr>
@@ -22,6 +23,7 @@
                     <th>Mata Pelajaran</th>
                     <th>UTS</th>
                     <th>UAS</th>
+                    
                     <th>Catatan</th>
                   </tr>
                 </thead>
@@ -53,6 +55,7 @@
 
           <div class="row">
             <div class="card-body table-responsive-sm">
+                 <h3 class="m-0 text-dark">Kelas 10Semester 2</h3>
               <table class="table table-bordered table-hover table-striped">
                 <thead>
                   <tr>
@@ -91,6 +94,7 @@
 
               <div class="row">
             <div class="card-body table-responsive-sm">
+                 <h3 class="m-0 text-dark">Kelas 11 Semester 1</h3>
               <table class="table table-bordered table-hover table-striped">
                 <thead>
                   <tr>
@@ -129,6 +133,7 @@
 
               <div class="row">
             <div class="card-body table-responsive-sm">
+                 <h3 class="m-0 text-dark">Kelas 11 Semester 2</h3>
               <table class="table table-bordered table-hover table-striped">
                 <thead>
                   <tr>
@@ -167,6 +172,7 @@
 
               <div class="row">
             <div class="card-body table-responsive-sm">
+                 <h3 class="m-0 text-dark">Kelas 12 Semester 1</h3>
               <table class="table table-bordered table-hover table-striped">
                 <thead>
                   <tr>
@@ -205,6 +211,7 @@
 
               <div class="row">
             <div class="card-body table-responsive-sm">
+                 <h3 class="m-0 text-dark">Kelas 12 Semester 2</h3>
               <table class="table table-bordered table-hover table-striped">
                 <thead>
                   <tr>

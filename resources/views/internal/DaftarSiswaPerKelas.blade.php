@@ -37,7 +37,7 @@
                     <td>{{$row->nama}}</td>
                     <td>{{$row->nis}}</td>
                     <td> 
-                      <a href="/pelajaran/internal/DaftarNilaiSiswa/{{ $row->id }}" class="btn btn-info">Detail Nilai</a>
+                      <a href="/pelajaran/internal/DaftarNilaiSiswa/{{ $row->id}}" class="btn btn-info">Detail Nilai</a>
                     </td>
                   </tr>
                   @endforeach
