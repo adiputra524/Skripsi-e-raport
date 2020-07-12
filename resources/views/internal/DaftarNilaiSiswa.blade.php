@@ -12,14 +12,12 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-
+   <a href="/auth/internal/DaftarNilaiSiswa/{{$rapot->student_id}}" class="btn btn-secondary">Export</a>
     <section class="content">
-      <div class="container-fluid">
-          <a href="/auth/internal/DaftarNilaiKelas/{rapor_header_id}" class="btn btn-secondary">Export</a>
-                    
+      @foreach($rapot->raport_headers as $data)
           <div class="row">
             <div class="card-body table-responsive-sm">
-               <h3 class="m-0 text-dark">Kelas 10 Semester 1</h3>
+            <h3 class="m-0 text-dark">Kelas {{ $data->grade }} Semester {{ $data->semester }}</h3>
               <table class="table table-bordered table-hover table-striped">
                 <thead>
                   <tr>
@@ -31,7 +29,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @empty($raport)
+                  @empty($data->mata_pelajarans)
                     <tr>
                       <td colspan="5">
                         <div class="d-flex justify-content-center align-self-center">
@@ -39,221 +37,21 @@
                         </div>
                       </td>
                     </tr>
-                  @else
-            
-                    @foreach($raport as $data)
+                  @else   
+                    @foreach($data->mata_pelajarans as $pelajaran)
                       <tr>
-                        <td> {{ $data->id }} </td>
-                        <td> {{ $data->nama_mata_pelajaran }} </td>
-                        <td> {{ $data->nilai_uts }} </td>
-                        <td> {{ $data->nilai_uas }} </td>
-                        <td> {{ $data->catatan }} </td>
+                        <td> {{ $loop->index }} </td>
+                        <td> {{ $pelajaran->nama_mata_pelajaran }} </td>
+                        <td> {{ $pelajaran->nilai_uts }} </td>
+                        <td> {{ $pelajaran->nilai_uas }} </td>
+                        <td> {{ $pelajaran->catatan }} </td>
                       </tr>
                     @endforeach
                   @endempty
                 </tbody>
               </table>
-
             </div>
           </div>
-
-          <div class="row">
-            <div class="card-body table-responsive-sm">
-               <h3 class="m-0 text-dark">Kelas 10 Semester 2</h3>
-              <table class="table table-bordered table-hover table-striped">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Mata Pelajaran</th>
-                    <th>UTS</th>
-                    <th>UAS</th>
-                    <th>Catatan</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @empty($raport)
-                    <tr>
-                      <td colspan="5">
-                        <div class="d-flex justify-content-center align-self-center">
-                          Data Kosong
-                        </div>
-                      </td>
-                    </tr>
-                  @else
-                    @foreach($raport as $data)
-                      <tr>
-                        <td> {{ $data->id }} </td>
-                        <td> {{ $data->nama_mata_pelajaran }} </td>
-                        <td> {{ $data->nilai_uts }} </td>
-                        <td> {{ $data->nilai_uas }} </td>
-                        <td> {{ $data->catatan }} </td>
-                      </tr>
-                    @endforeach
-                  @endempty
-                </tbody>
-              </table>
-
-            </div>
-          </div>
-
-              <div class="row">
-            <div class="card-body table-responsive-sm">
-               <h3 class="m-0 text-dark">Kelas 11 Semester 1</h3>
-              <table class="table table-bordered table-hover table-striped">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Mata Pelajaran</th>
-                    <th>UTS</th>
-                    <th>UAS</th>
-                    <th>Catatan</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @empty($raport)
-                    <tr>
-                      <td colspan="5">
-                        <div class="d-flex justify-content-center align-self-center">
-                          Data Kosong
-                        </div>
-                      </td>
-                    </tr>
-                  @else
-                    @foreach($raport as $data)
-                      <tr>
-                        <td> {{ $data->id }} </td>
-                        <td> {{ $data->nama_mata_pelajaran }} </td>
-                        <td> {{ $data->nilai_uts }} </td>
-                        <td> {{ $data->nilai_uas }} </td>
-                        <td> {{ $data->catatan }} </td>
-                      </tr>
-                    @endforeach
-                  @endempty
-                </tbody>
-              </table>
-
-            </div>
-          </div>
-
-              <div class="row">
-            <div class="card-body table-responsive-sm">
-               <h3 class="m-0 text-dark">Kelas 11 Semester 2</h3>
-              <table class="table table-bordered table-hover table-striped">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Mata Pelajaran</th>
-                    <th>UTS</th>
-                    <th>UAS</th>
-                    <th>Catatan</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @empty($raport)
-                    <tr>
-                      <td colspan="5">
-                        <div class="d-flex justify-content-center align-self-center">
-                          Data Kosong
-                        </div>
-                      </td>
-                    </tr>
-                  @else
-                    @foreach($raport as $data)
-                      <tr>
-                        <td> {{ $data->id }} </td>
-                        <td> {{ $data->nama_mata_pelajaran }} </td>
-                        <td> {{ $data->nilai_uts }} </td>
-                        <td> {{ $data->nilai_uas }} </td>
-                        <td> {{ $data->catatan }} </td>
-                      </tr>
-                    @endforeach
-                  @endempty
-                </tbody>
-              </table>
-
-            </div>
-          </div>
-
-              <div class="row">
-            <div class="card-body table-responsive-sm">
-               <h3 class="m-0 text-dark">Kelas 12 Semester 1</h3>
-              <table class="table table-bordered table-hover table-striped">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Mata Pelajaran</th>
-                    <th>UTS</th>
-                    <th>UAS</th>
-                    <th>Catatan</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @empty($raport)
-                    <tr>
-                      <td colspan="5">
-                        <div class="d-flex justify-content-center align-self-center">
-                          Data Kosong
-                        </div>
-                      </td>
-                    </tr>
-                  @else
-                    @foreach($raport as $data)
-                      <tr>
-                        <td> {{ $data->id }} </td>
-                        <td> {{ $data->nama_mata_pelajaran }} </td>
-                        <td> {{ $data->nilai_uts }} </td>
-                        <td> {{ $data->nilai_uas }} </td>
-                        <td> {{ $data->catatan }} </td>
-                      </tr>
-                    @endforeach
-                  @endempty
-                </tbody>
-              </table>
-
-            </div>
-          </div>
-
-              <div class="row">
-            <div class="card-body table-responsive-sm">
-               <h3 class="m-0 text-dark">Kelas 12 Semester 2</h3>
-              <table class="table table-bordered table-hover table-striped">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Mata Pelajaran</th>
-                    <th>UTS</th>
-                    <th>UAS</th>
-                    <th>Catatan</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @empty($raport)
-                    <tr>
-                      <td colspan="5">
-                        <div class="d-flex justify-content-center align-self-center">
-                          Data Kosong
-                        </div>
-                      </td>
-                    </tr>
-                  @else
-                    @foreach($raport as $data)
-                      <tr>
-                        <td> {{ $data->id }} </td>
-                        <td> {{ $data->nama_mata_pelajaran }} </td>
-                        <td> {{ $data->nilai_uts }} </td>
-                        <td> {{ $data->nilai_uas }} </td>
-                        <td> {{ $data->catatan }} </td>
-                      </tr>
-                    @endforeach
-                  @endempty
-                </tbody>
-              </table>
-
-            </div>
-          </div>
-          <!-- /.row (main row) -->
-        </div><!-- /.container-fluid -->
-      </section>
-      <!-- /.content -->
-    </div>
+      @endforeach
+    </section>
 @endsection

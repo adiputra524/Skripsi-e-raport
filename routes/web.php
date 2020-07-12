@@ -43,7 +43,7 @@ Route::prefix('auth')->group(function(){
 
 	Route::get('internal/inputGuru/hapus/{id}','SchoolInternalController@deleteGuru');
 
-	Route::get('/internal/DaftarNilaiKelas/{rapor_header_id}','mata_pelajaranController@exportNilai');
+	Route::get('/internal/DaftarNilaiSiswa/{id}','mata_pelajaranController@exportNilai');
 
 	// Route::get('/internal/DaftarNilaiKelas11','mata_pelajaranController@exportNilai11');
 
@@ -98,6 +98,7 @@ Route::prefix('student')->group(function(){
 
 	Route::get('/StudentLogout','StudentController@LogoutStudent');
 
+	Route::get('/forgot_password','SecurityForgotPassword@forgot');
 
 
 
@@ -122,6 +123,8 @@ Route::prefix('pelajaran')->group(function(){
 Route::get('/internal/ImportNilai','mata_pelajaranController@IndexImportNilai');
 
 	Route::get('/internal/DaftarNilaiSiswa/{id}','mata_pelajaranController@IndexMataPelajaran');
+
+	Route::post('/internal/DaftarNilaiSiswa/{id}', 'mata_pelajaranController@IndexMataPelajaran');
 
 	Route::post('/internal/DaftarNilaiSiswa','mata_pelajaranController@storeMataPelajaran');
 	

@@ -15,8 +15,7 @@ use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use Illuminate\Contracts\View\View;
-class MataPelajaranExport implements  FromQuery
+class MataPelajaranExport implements FromQuery
 {
     // use ExportTable;
 
@@ -25,9 +24,6 @@ class MataPelajaranExport implements  FromQuery
     function __construct($id)
     {
         $this->id = $id;
-
-      
-        return $this;
     }
     public function headings(): array
     {
@@ -40,13 +36,59 @@ class MataPelajaranExport implements  FromQuery
             'catatan',
         ];
     }
-
+  
     public function query()
     {
-        return Mata_pelajaran::where('rapor_header_id',$this->id)->get()([
-            'id','rapor_header_id', 'nama_mata_pelajaran', 'nilai_uts', 'nilai_uas','catatan'
-        ]);
-        return Mata_pelajaran::where('id', $this->id);
+     
+        $raport = DB::table('raports as r')
+        ->select('r.student_id','r.id as rapor_id')
+        ->where('r.student_id','=',$this->id)
+        ->get()
+        ->first();
+      
+
+        if($raport == null){
+            return redirect('/internal/DaftarNilaiSiswa/'.$this->id);
+        }
+
+        $query = "SELECT rh.id as rapor_header_id,semester,grade,tahun_ajaran FROM rapor_headers rh
+         WHERE rh.rapor_id =". $raport->rapor_id;
+
+         $rapor_header = DB::select($query);
+      
+         $raport_bundle_content = [];
+
+        foreach ($rapor_header as $header) {
+            $query = "SELECT nama_mata_pelajaran, nilai_uts, nilai_uas, catatan 
+						FROM mata_pelajarans mp
+							WHERE mp.rapor_header_id = " . $header->rapor_header_id;
+
+            $datas = DB::select($query);
+
+            $factory = new ShowRaporHeader(
+                    $header->rapor_header_id,
+                    $header->semester,
+                    $header->grade,
+                    $header->tahun_ajaran,
+                    $datas
+                );
+
+            array_push($raport_bundle_content, $factory);
+        }
+
+
+        $rapot = new ShowRaport(
+                $raport->student_id,
+                $raport->rapor_id,
+                $raport_bundle_content
+            );
+
+            
+
+        // return Mata_pelajaran::where('rapor_header_id',$this->id)->get()([
+        //     'id','rapor_header_id', 'nama_mata_pelajaran', 'nilai_uts', 'nilai_uas','catatan'
+        // ]);
+        return $rapot;
     }
 
     // public function query()
@@ -77,4 +119,34 @@ class MataPelajaranExport implements  FromQuery
 
     // }
 
+}
+class ShowRaport
+{
+    public $student_id;
+    public $rapor_id;
+    public $raport_headers;
+
+    public function __construct($a, $b, $c)
+    {
+        $this->student_id = $a;
+        $this->rapor_id = $b;
+        $this->raport_headers = $c;
+    }
+}
+class ShowRaporHeader
+{
+    public $rapor_header_id;
+    public $semester;
+    public $grade;
+    public $tahun_ajaran;
+    public $mata_pelajarans;
+
+    public function __construct($a, $b, $c, $d, $e)
+    {
+        $this->rapor_header_id = $a;
+        $this->semester = $b;
+        $this->grade = $c;
+        $this->tahun_ajaran = $d;
+        $this->mata_pelajarans = $e;
+    }
 }

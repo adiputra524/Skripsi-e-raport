@@ -17,7 +17,19 @@ class MataPelajaranImport implements ToModel
     {
         if($row[0] === "nama_mata_pelajaran") return;
 
-        $mata_pelajaran = Mata_pelajaran::where('nama_mata_pelajaran', '=', trim($row[0]))->first();
+        if(Session::get('new_raport_header') != null){
+          return new Mata_pelajaran([
+            'rapor_header_id' => Session::get('raport_header_id'),
+            'nama_mata_pelajaran' => $row[0],
+            'nilai_uts' => (float) $row[1],
+            'nilai_uas' => (float) $row[2],
+            'catatan' => $row[3]
+          ]);
+        }
+
+        $mata_pelajaran = Mata_pelajaran::where('nama_mata_pelajaran', '=', trim($row[0]))
+                          ->where('rapor_header_id', '=', Session::get('raport_header_id'))
+                          ->get()->first();
 
         if($mata_pelajaran ==null){
 
@@ -30,7 +42,6 @@ class MataPelajaranImport implements ToModel
             ]);
         }else if($mata_pelajaran !=null)
         {
-          
           $mata_pelajaran->nama_mata_pelajaran=$row[0];
           $mata_pelajaran->nilai_uts=(double) $row[1];
           $mata_pelajaran->nilai_uas=(double) $row[2];

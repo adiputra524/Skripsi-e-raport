@@ -37,7 +37,7 @@
 
 	<label class="forgot-password">
 		<button id="fp-button"><img src="{{asset('/image/lock.png')}}">
-			Forgot your password?
+		<a href="{{url('/forgot_password')}}">Forgot password</a>
 		</button>
 	</label>
 </div>
