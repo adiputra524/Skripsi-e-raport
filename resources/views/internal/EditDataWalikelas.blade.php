@@ -10,11 +10,18 @@
         </div>
       </div>
     </div>
-
-    <form method="POST"  action="/auth/update/{{$walikelas->id}}">
-      @csrf
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    <form method="post" action="/auth/internal/update/{{$walikelas->id}}">
+     {{csrf_field()}}
       {{method_field('PUT')}}
-
       
       <section class="content">
         <div class="container-fluid">
@@ -31,11 +38,10 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    
+                  <tr>           
                     <td><input type="text" name="nama"  value="{{$walikelas->name}}"></td>
                     <td><input type="email" name="email"  value="{{$walikelas->email}}"></td>
-                    <td><input type="text" name="nmr-telpon"  value="{{$walikelas->phone}}"></td>
+                    <td><input type="text" name="phone"  value="{{$walikelas->phone}}"></td>
                   </tr>
                 </tbody>
               </table>
@@ -47,14 +53,4 @@
             <div class="col-md-4"></div>
           </div>
         </form>
-
-        {{-- <script type="text/javascript">
-        $('#submit-button').click(function(e){
-          if($('#nama').val()== $('#emai').val().('#nmr-telepon').val())
-          {
-            $('#Update-Data-Walikelas').submit();
-          }
-
-        });
-        </script> --}}
 @endsection

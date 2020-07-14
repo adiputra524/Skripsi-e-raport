@@ -42,7 +42,7 @@
         $('#Update-Password').submit();
       }else{
         $.notify({ 
-          message: 'Password lu beda tolong disamakan terima kasih!'
+          message: 'Password lu berbeda dengan database tolong disamakan terima kasih!'
         },
           { 
             z_index: 99999, 

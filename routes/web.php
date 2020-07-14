@@ -39,19 +39,15 @@ Route::prefix('auth')->group(function(){
 
 	Route::get('/internal/EditDataWalikelas/edit/{id}','SchoolInternalController@editWalikelas');
 
+	
+
 	Route::put('/internal/update/{id}','SchoolInternalController@updateWalikelas');
 
 	Route::get('internal/inputGuru/hapus/{id}','SchoolInternalController@deleteGuru');
 
 	Route::get('/internal/DaftarNilaiSiswa/{id}','mata_pelajaranController@exportNilai');
 
-	// Route::get('/internal/DaftarNilaiKelas11','mata_pelajaranController@exportNilai11');
-
-	// Route::get('/internal/DaftarNilaiKelas12','mata_pelajaranController@exportNilai12');
-
 	
-
-
 });
 
 
@@ -87,7 +83,7 @@ Route::prefix('student')->group(function(){
 
 	Route::get('/internal/EditDataSiswa/edit/{id}','StudentController@editSiswa');
 
-	Route::put('/update/{id}','StudentController@updateSiswa');
+	Route::put('/internal/update/{id}','StudentController@updateSiswa');
 
 
 	Route::get('internal/inputSiswa/hapus/{id}','StudentController@deleteSiswa');
@@ -95,11 +91,10 @@ Route::prefix('student')->group(function(){
 	Route::get('/internal/DataSiswa/{kelas}','StudentController@DataSiswa');
 
 
-
+    Route::get('/activate/{email}/{code}','Security\ActivationController@activate');
 	Route::get('/StudentLogout','StudentController@LogoutStudent');
 
-	Route::get('/forgot_password','SecurityForgotPassword@forgot');
-
+	
 
 
 });

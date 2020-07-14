@@ -11,8 +11,16 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-
-    <form method="post" action="/student/update/{{$students->id}}">
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    <form method="post" action="/student/internal/update/{{$students->id}}">
       {{csrf_field()}}
       {{method_field('PUT')}}
 
@@ -25,7 +33,7 @@
 
           <!-- Main row -->
           <div class="row">
-            <input type="hidden" name="id" value="data[i].id">
+          <input type="hidden" name="id" value="{{$students->id}}">
             <table class="table table-bordered table-hover table-striped">
               <thead>
                 <tr>
@@ -42,7 +50,7 @@
                   <td><input type="text" name="nama" id="nama" value="{{$students->nama}}"></td>
                   <td><input type="text" name="kelas" id="kelas" value="{{$students->class_id}}"></td>
                   <td><input type="email" name="email" id="email" value="{{$students->email}}"></td>
-                  <td><input type="text" name="nmr-telpon" id="nmr-telpon" value="{{$students->phone}}"></td>
+                  <td><input type="text" name="phone" id="phone" value="{{$students->phone}}"></td>
                 </tr>
               </tbody>
             </table>

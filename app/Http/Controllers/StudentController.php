@@ -177,27 +177,37 @@ class StudentController extends Controller
 
   public function updateSiswa(Request $request, $id)
   {
-    $this->validate($request, [
+
+    $validate = $this->validate($request, [
       'nis' => 'required',
       'nama' => 'required',
-      'class_id' => 'required',
+      'kelas' => 'required',
       'email' => 'required',
-      'phone' => 'required'
+      'phone' => 'required',
+    ],
+    [
+        'nis.required' => 'Nis Wajib Diisi',
+        'nama.required' => 'nama Wajib Diisi',
+        'kelas.required' => 'Kelas  Wajib Diisi',
+        'email.required' => 'Email Wajib Diisi',
+        'phone.required' => 'Nomor Telepon Wajib Diisi',
+    
 
     ]);
 
 
 
     $students = TblStudent::find($id);
+    
     $students->nis = $request->nis;
     $students->nama = $request->nama;
-    $students->class_id = $request->class_id;
+    $students->class_id = $request->kelas;
     $students->email = $request->email;
     $students->phone = $request->phone;
 
     $students->save();
-
-    return redirect('/student/internal/inputSiswa')->with('data berhasil diubah');
+   
+    return redirect('/student/internal/EditDataSiswa/edit/' . $id)->with(['success' => 'data berhasil diubah']);
   }
 
   public function deleteSiswa($id)
