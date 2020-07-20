@@ -32,7 +32,7 @@
 
 	<label class="forgot-password">
 		<button id="fp-button"><img src="{{asset('/image/lock.png')}}">
-			<a href="{{url('/forgot_password')}}">Forgot password</a>
+			<a href="{{url('/forgot_password_student')}}">Forgot password</a>
 		</button>
 	</label>
 </div>
