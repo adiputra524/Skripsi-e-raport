@@ -113,7 +113,7 @@ class StudentController extends Controller
     ->first();
 
     if ($raport == null) {
-      return view('/internal/DaftarNilaiSiswa', [
+      return view('/student/NilaiSiswa', [
         'rapot' => new ShowRaport($id, null, [new ShowRaporHeader('', '', '', '', [])])
       ]);
     }
@@ -207,7 +207,7 @@ class StudentController extends Controller
 
     $students->save();
    
-    return redirect('/student/internal/EditDataSiswa/edit/' . $id)->with(['success' => 'data berhasil diubah']);
+    return redirect('/student/internal/inputSiswa/')->with(['success' => 'data berhasil diubah']);
   }
 
   public function deleteSiswa($id)
