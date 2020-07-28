@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Mail;
 
 use App\SchoolInternal;
 use App\TblStudent;
-
+use Session;
+use DB;
 
 class ForgotPasswordController extends Controller
 {
@@ -32,6 +33,10 @@ class ForgotPasswordController extends Controller
 			SchoolInternal::where('email', $data['email']) -> update(['password' => $new_password]);
 
 			//Send Forgot Password Email Code
+			if(!isset($userDetails)){
+				session::flash('error','Email yang anda masukkan salah.');
+				return redirect('/forgot_password');
+			}else{
 			 $email = $data['email'];
 			 $name = $userDetails->name;
 			 $messageData = [
@@ -39,10 +44,15 @@ class ForgotPasswordController extends Controller
 			 	'name' => $name,
 			 	'password' => $random_password
 			 ];
+
+			
+
 			 Mail::send('email.forgotpassword', $messageData, function($message) use($email){
 			 		$message->to($email) -> subject('New Password');
 			 });		
-			 	return redirect('/auth/LoginPage') -> with('success','Tolong cek email anda untuk melihat password baru');
+			 	Session::flash('success', 'Silahkan cek email anda untuk melihat password baru !');
+			 	return redirect('/auth/LoginPage');
+			 	}
 			}	
 		}
 	
@@ -66,6 +76,10 @@ class ForgotPasswordController extends Controller
 			TblStudent::where('email', $data['email']) -> update(['password' => $new_password]);
 
 			//Send Forgot Password Email Code
+			if(!isset($userDetails)){
+				session::flash('error','Email yang anda masukkan salah.');
+				return redirect('/forgot_password_student');
+			}else{
 			 $email = $data['email'];
 			 $nama = $userDetails->nama;
 			 $messageData = [
@@ -76,8 +90,10 @@ class ForgotPasswordController extends Controller
 			 Mail::send('email.forgotpasswordStudent', $messageData, function($message) use($email){
 			 		$message->to($email) -> subject('New Password');
 			 });		
-			 	return redirect('/auth/LoginPage') -> with('success', 'Tolong cek email anda untuk melihat password baru');
-			}
+			 	Session::flash('success', 'Silahkan cek email anda untuk melihat password baru !');
+			 	return redirect('/student/LoginStudent');
+			 }
+		}
 	}
 }
 
