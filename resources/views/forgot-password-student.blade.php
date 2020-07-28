@@ -8,7 +8,6 @@
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript" src="{{asset('/js/alert-box.js')}}"></script>
 
-
 	@if(Session::has('error'))
     		<script type="text/javascript">
 				alert("{{ Session::get('error') }}");
@@ -20,7 +19,7 @@
 	<div class="container">
 
 		<h2>Forgot Password ?</h2>
-		<form method="post" action="{{url('/forgot_password')}}">
+		<form method="post" action="{{url('/forgot_password_student')}}">
 			@csrf
 			<div class="login">
 				<div id="login-form">
@@ -31,7 +30,6 @@
 			Submit
 		</button>
 	</form>
-
 
 </body>
 </html>
