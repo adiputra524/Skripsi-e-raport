@@ -95,25 +95,17 @@
                   Home
                 </p>
               </a>
-            </li> 
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon ion-android-clipboard"></i>
-                <p>
-                  Penilaian Akademik
-                  <i class="right ion-android-arrow-dropleft"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview"> 
-              @foreach(Session::get('class') as $data)
-                <li class="nav-item">
-                  <a href="/student/siswa/NilaiSiswa/{{ $data->id }}" class="nav-link">
-                    <p>{{ $data->class_name }}</p>
-                  </a>
-                </li>
-                @endforeach
-              </ul>
             </li>
+            @if(Session::has('tbl_students'))
+              <li class="nav-item">
+              <a href="/student/siswa/NilaiSiswa/{{ Session::get('tbl_students')->id}}" class="nav-link">
+                  <i class="nav-icon ion-android-clipboard"></i>
+                  <p>
+                    Penilaian Akademik
+                  </p>
+                </a>
+              </li>
+            @endif
             <li class="nav-item">
               <a href="/student/siswa/DataWaliKelas" class="nav-link">
                 <i class="ion-android-people"></i>
